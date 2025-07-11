@@ -1,4 +1,4 @@
-package apprisal;
+package day3.apprisal;
 
 public class Employees {
 
@@ -56,13 +56,14 @@ public class Employees {
         this.empRating = empRating;
     }
 
-    public  void getEmployeeDetail(Employees emp){
+    public  void getEmployeeDetail(Employees emp) {
         System.out.println("Employee Id: " + emp.getEmpId());
         System.out.println("Employee Name: " + emp.getEmpName());
         System.out.println("Employee Designation: " + emp.getEmpDesignation());
     }
-    public  void getEmployeeDetail(Employees emp, String detailed){
-        if (detailed.contains("detailed")){
+
+    public  void getEmployeeDetail(Employees emp, String detailed) {
+        if (detailed.contains("detailed")) {
             System.out.println("Employee Id: " + emp.getEmpId());
             System.out.println("Employee Name: " + emp.getEmpName());
             System.out.println("Employee Designation: " + emp.getEmpDesignation());
@@ -71,8 +72,7 @@ public class Employees {
         }
     }
 
-
-    public void getEmployeeApprisal(Employees emp){
+    public void getEmployeeApprisal(Employees emp) {
         System.out.println("The apprisal for the employee is: " + emp.getEmpSalary() + " + hike");
     }
 

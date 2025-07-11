@@ -1,4 +1,4 @@
-package apprisal;
+package day3.apprisal;
 
 public class Senior extends Employees{
 
@@ -11,7 +11,6 @@ public class Senior extends Employees{
 
     @Override
     public void getEmployeeApprisal(Employees emp){
-
         if (emp.getEmpRating() == 5) {
             hike = 15;
         } else if (emp.getEmpRating() > 2 && emp.getEmpRating() < 5) {
@@ -19,6 +18,7 @@ public class Senior extends Employees{
         } else if (emp.getEmpRating() > 0 && emp.getEmpRating() < 3) {
             hike = 25;
         }
+
         int apprisal = emp.getEmpSalary() + emp.getEmpSalary() * hike/100;
 
         System.out.println("Apprisal for senior employee is: " + emp.getEmpSalary()*(hike/100) + emp.getEmpSalary());

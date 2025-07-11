@@ -1,4 +1,4 @@
-package employee;
+package day1.pascalstriangle.employee;
 
 import java.util.Scanner;
 

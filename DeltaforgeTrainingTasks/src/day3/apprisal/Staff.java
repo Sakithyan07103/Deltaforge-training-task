@@ -1,4 +1,4 @@
-package apprisal;
+package day3.apprisal;
 
 
 public class Staff extends Employees{
@@ -11,7 +11,7 @@ public class Staff extends Employees{
 
 
     @Override
-    public void getEmployeeApprisal(Employees emp){
+    public void getEmployeeApprisal(Employees emp) {
         if (emp.getEmpRating() == 5) {
             hike = 10;
         } else if (emp.getEmpRating() > 2 && emp.getEmpRating() < 5) {

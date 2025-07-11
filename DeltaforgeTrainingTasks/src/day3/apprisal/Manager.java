@@ -1,4 +1,4 @@
-package apprisal;
+package day3.apprisal;
 
 public class Manager extends Employees
 {
@@ -11,8 +11,7 @@ public class Manager extends Employees
 
 
     @Override
-    public void getEmployeeApprisal(Employees emp){
-
+    public void getEmployeeApprisal(Employees emp) {
         if (emp.getEmpRating() == 5) {
             hike = 20;
         } else if (emp.getEmpRating() > 2 && emp.getEmpRating() < 5) {
@@ -20,9 +19,11 @@ public class Manager extends Employees
         } else if (emp.getEmpRating() > 0 && emp.getEmpRating() < 3) {
             hike = 30;
         }
+
         int apprisal = emp.getEmpSalary() + emp.getEmpSalary() * hike/100;
 
-        System.out.println("Apprisal for Manager level employee is: " + emp.getEmpSalary()*(hike/100) + emp.getEmpSalary());
+        System.out.println("Apprisal for Manager level employee is: "
+                + emp.getEmpSalary()*(hike/100) + emp.getEmpSalary());
     }
 
 }
