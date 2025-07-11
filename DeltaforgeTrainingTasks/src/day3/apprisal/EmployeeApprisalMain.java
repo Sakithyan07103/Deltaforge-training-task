@@ -9,16 +9,16 @@ public class EmployeeApprisalMain {
         Employees prasad = new Manager(3, "Prasad", "Manager",100000, 3);
 
 
-        saki.getEmployeeDetail(saki, "detailed");
-        saki.getEmployeeApprisal(saki);
-        System.out.println("\n");
-        rohini.getEmployeeDetail(rohini);
-        rohini.getEmployeeApprisal(rohini);
-        System.out.println("\n");
-        rohini.getEmployeeDetail(prasad);
-        prasad.getEmployeeApprisal(prasad);
-
-        System.out.println("\n");
+//        saki.getEmployeeDetail(saki, "detailed");
+//        saki.getEmployeeApprisal(saki);
+//        System.out.println("\n");
+//        rohini.getEmployeeDetail(rohini);
+//        rohini.getEmployeeApprisal(rohini);
+//        System.out.println("\n");
+//        rohini.getEmployeeDetail(prasad);
+//        prasad.getEmployeeApprisal(prasad);
+//
+//        System.out.println("\n");
 
         getAllEmployeeDetail();
 
@@ -29,6 +29,9 @@ public class EmployeeApprisalMain {
         Employees rohini = new Senior(2,"Rohini" , "senior" , 30000,5);
         Employees prasad = new Manager(3, "Prasad", "Manager" , 100000, 3);
         Employees[] emp = {saki,rohini,prasad};
+
+        getAllEmployeeDetail();
+
         for (int i = 0; i < emp.length ; i++) {
             System.out.println(emp[i].toString() + "\n");
         }

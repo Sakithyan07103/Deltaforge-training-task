@@ -8,7 +8,6 @@ public class Senior extends Employees{
         super(empId, empName, empDesignation, empSalary, empRating);
     }
 
-
     @Override
     public void getEmployeeApprisal(Employees emp){
         if (emp.getEmpRating() == 5) {

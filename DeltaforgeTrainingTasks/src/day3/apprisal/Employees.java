@@ -75,10 +75,4 @@ public class Employees {
     public void getEmployeeApprisal(Employees emp) {
         System.out.println("The apprisal for the employee is: " + emp.getEmpSalary() + " + hike");
     }
-
-
-
-
-
-
 }

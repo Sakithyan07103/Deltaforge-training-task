@@ -37,16 +37,13 @@ public class PaymentMain   {
                     System.out.print("Enter card number: ");
                     String cardNum = sc.nextLine();
 
-
                     System.out.print("Enter card holder name: ");
                     String cardName = sc.nextLine();
 
-
                     System.out.print("Enter expiry date ");
                     String stringDate = sc.nextLine();
-                    DateFormat format = new SimpleDateFormat("MM yyyy");
+                    DateFormat format = new SimpleDateFormat("MM yy");
                     Date cardDate = format.parse(stringDate);
-
 
                     System.out.print("Enter CVV: ");
                     int cardCvv = sc.nextInt();
@@ -54,8 +51,8 @@ public class PaymentMain   {
                     System.out.println("Processing credit card payment of ₹" + amt);
                     System.out.println("Charged to card ending with " + cardNum.substring(cardNum.length() - 4));
 
-                    DateFormat format1 = new SimpleDateFormat("MM yyyy");
-                    Date referDate = format1.parse("07 2025");
+                    DateFormat format1 = new SimpleDateFormat("MM yy");
+                    Date referDate = format1.parse("07 25");
                     if (cardNum.length() == 16 && !cardNum.contains("-") && (cardCvv>99 && cardCvv < 1000) && cardDate.after(referDate)){
                         creditcard.sucesssMessage();
                     } else {
