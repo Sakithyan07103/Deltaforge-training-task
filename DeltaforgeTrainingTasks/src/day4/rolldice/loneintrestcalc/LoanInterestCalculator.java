@@ -20,14 +20,18 @@ public class LoanInterestCalculator {
     }
 
     public void setLoanStartDate(Date loanStartDate) throws ParseException, DateException {
-
         DateFormat format1 = new SimpleDateFormat("dd MM yyyy");
-        Date todayDate = format1.parse("11 07 2025");
+        Date todayDate = null;
+        try{
+            todayDate   = format1.parse("11 07 2025");
+        } catch (ParseException e) {
+            System.out.println("invalid date format");
+        }
 
         if (loanStartDate.after(todayDate)) {
             this.loanStartDate = loanStartDate;
         } else {
-            throw new DateException();
+            throw new DateException(" you can't add previous days date! ");
         }
     }
 
@@ -39,7 +43,7 @@ public class LoanInterestCalculator {
         if (loanDuration > 0 && loanDuration <=30){
             this.loanDuration = loanDuration;
         } else {
-            throw new LoanDurationLimitException();
+            throw new LoanDurationLimitException(" you can't pay this loan for more than 30 years ");
         }
     }
 
@@ -62,8 +66,7 @@ public class LoanInterestCalculator {
     }
 
     public void setLoanInterestRate() {
-
-        if(loanDuration > 0 && loanDuration < 5) {
+        if (loanDuration > 0 && loanDuration < 5) {
             this.loanInterestRate = 8;
         } else if (loanDuration >= 5 && loanDuration < 10) {
             this.loanInterestRate = 10;

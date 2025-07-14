@@ -4,7 +4,7 @@ public class Stock {
     private int stockId;
     private final String stockName;
     private final int stockPrice;
-    private int stockQuantity;
+    private int stockQuantity = 0;
 
     public Stock(int stockId, String stockName, int stockPrice) {
         this.stockId = stockId;
@@ -21,13 +21,11 @@ public class Stock {
     }
 
     public void viewAllStocks() {
-       if(stockQuantity > 0) {
+
            System.out.println("ID: " + stockId);
            System.out.println("Name: " + stockName);
            System.out.println("Price: " + stockPrice);
-       } else if (stockQuantity == 0) {
-           System.out.println("you have no stock to view! ");
-       }
+
     }
 
     public void buyStock(int quantity) {
@@ -43,7 +41,7 @@ public class Stock {
         } else if(quantity == 0){
             System.out.println("You haven't sold any shares of any stocks ");
         } else {
-            System.out.println("you didn't have much shares to buy in this stock");
+            System.out.println("Quantity of your stock is only " + stockQuantity + " but you are trying to sell " + quantity + " shares ");
         }
     }
 

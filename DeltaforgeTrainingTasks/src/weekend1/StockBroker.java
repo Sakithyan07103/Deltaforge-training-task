@@ -46,25 +46,25 @@ public class StockBroker {
 
     public static void viewAllStocks() {
 
-        for (Stock stocks : stockList){
+        for (Stock stocks : stockList) {
             stocks.viewAllStocks();
         }
-        System.out.println("\n");
 
+        System.out.println("\n");
     }
 
     public static void viewMyStock() {
         boolean myStock = false;
 
-        if (!myStock)
+        if (!myStock) {
         for (Stock stocks : stockList) {
             stocks.viewMyStocks();
             myStock = true;
+          }
         } else if (myStock) {
             System.out.println("You have no stock to view");
             System.out.println("\n");
         }
-
     }
 
     public static void buyStock() {
