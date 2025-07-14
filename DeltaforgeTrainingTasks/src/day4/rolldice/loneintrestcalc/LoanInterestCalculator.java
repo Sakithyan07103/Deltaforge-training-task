@@ -31,7 +31,7 @@ public class LoanInterestCalculator {
         if (loanStartDate.after(todayDate)) {
             this.loanStartDate = loanStartDate;
         } else {
-            throw new DateException(" you can't add previous days date! ");
+            throw new DateException(" you can't add previous days date!");
         }
     }
 
@@ -43,7 +43,7 @@ public class LoanInterestCalculator {
         if (loanDuration > 0 && loanDuration <=30){
             this.loanDuration = loanDuration;
         } else {
-            throw new LoanDurationLimitException(" you can't pay this loan for more than 30 years ");
+            throw new LoanDurationLimitException(" you can't pay this loan for more than 30 years");
         }
     }
 
@@ -52,7 +52,7 @@ public class LoanInterestCalculator {
     }
 
     public void setLoanAmount(int loanAmount) {
-        if (loanAmount < 1000 ) {
+        if (loanAmount < 1000) {
             throw new LoanAmountLimitException("Loan amount should be at least 1000");
         } else if (loanAmount >= 10000000) {
             throw new LoanAmountLimitException("Loan amount should be less than 10000000");

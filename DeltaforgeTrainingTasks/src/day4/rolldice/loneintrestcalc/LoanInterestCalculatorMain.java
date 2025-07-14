@@ -37,14 +37,14 @@ public class LoanInterestCalculatorMain {
         System.out.println("\n");
         System.out.println("=====================================================================");
 
-        double amount = (LIC.getLoanAmount()*LIC.getLoanDuration()*LIC.getLoanInterestRate()) / 100.0 ;
+        double amount = (LIC.getLoanAmount() * LIC.getLoanDuration() * LIC.getLoanInterestRate()) / 100.0 ;
 
         System.out.println("Loan amount: " + LIC.getLoanAmount());
         System.out.println("Starting date for you loan repayment is: " + LIC.getLoanStartDate());
         System.out.println("Number of years you will be paying: " + LIC.getLoanDuration());
         System.out.println("Interest for your loan is: " + LIC.getLoanInterestRate());
         System.out.println("Total amount to be paid in " + LIC.getLoanDuration() + " years is: " + amount );
-        System.out.println("Your monthly EMI for " + LIC.getLoanDuration() + " years is: " + amount/(LIC.getLoanDuration()*12));
+        System.out.println("Your monthly EMI for " + LIC.getLoanDuration() + " years is: " + amount / (LIC.getLoanDuration() * 12));
 
     }
 
