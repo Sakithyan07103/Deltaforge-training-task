@@ -10,7 +10,7 @@ public class RollDice {
         while(true){
             System.out.print("Enter start to roll a die: ");
             die = sc.nextLine();
-            if(die.contains("start")){
+            if(die.equalsIgnoreCase("start")){
                 int random = (int)(Math.random() * 6) + 1;
                 System.out.println(random);
             } else if(die.contains("exit")){
