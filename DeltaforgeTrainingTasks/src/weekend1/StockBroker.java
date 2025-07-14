@@ -49,6 +49,8 @@ public class StockBroker {
         for (Stock stocks : stockList){
             stocks.viewAllStocks();
         }
+        System.out.println("\n");
+
     }
 
     public static void viewMyStock() {
@@ -60,6 +62,7 @@ public class StockBroker {
             myStock = true;
         } else if (myStock) {
             System.out.println("You have no stock to view");
+            System.out.println("\n");
         }
 
     }
@@ -78,6 +81,8 @@ public class StockBroker {
                 break;
             }
         }
+        System.out.println("\n");
+
     }
 
     public static void sellStock() {
@@ -94,7 +99,6 @@ public class StockBroker {
                 break;
             }
         }
-
+        System.out.println("\n");
     }
-
 }
