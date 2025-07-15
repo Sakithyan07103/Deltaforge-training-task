@@ -21,11 +21,7 @@ public class DisplayStudents {
         dispayPaasedStudents();
         displahyHighestLowestMarks();
         displayPassOrFail();
-
-
-
-
-
+        
     }
 
     public static void displaySortedByNames() {
