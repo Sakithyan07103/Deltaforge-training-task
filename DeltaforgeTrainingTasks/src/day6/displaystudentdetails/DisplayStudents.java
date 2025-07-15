@@ -41,11 +41,10 @@ public class DisplayStudents {
     }
 
     public static void dispayPaasedStudents() {
-        List<Student> passedStudents = students.stream().filter(n -> n.getStudentMarks() >= 40).toList();
+        students.stream().filter(n -> n.getStudentMarks() >= 40)
+                .forEach(student -> System.out.println(student.getStudentName()
+                        + " passed with " + student.getStudentMarks()));
 
-        for (Student stds : passedStudents) {
-            System.out.println(stds.getStudentName() + " passed with " + stds.getStudentMarks());
-        }
         System.out.println();
     }
 
@@ -64,7 +63,7 @@ public class DisplayStudents {
                         s -> s.getStudentId(), s -> s.getStudentMarks() >= 40 ? "Pass" : "Fail"));
 
         System.out.println("Student marks Pass/Fail:");
-        passFailMap.forEach((id, marks) -> System.out.println("Student ID " + id + ": " + marks));
+        passFailMap.forEach((id, marks) -> System.out.println("Student ID " + id + " : " + marks));
         System.out.println();
     }
 }
