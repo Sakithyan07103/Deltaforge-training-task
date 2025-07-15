@@ -61,12 +61,11 @@ public class DisplayStudents {
     public static void displayPassOrFail() {
         Map<Integer, String> passFailMap = students.stream()
                 .collect(Collectors.toMap(
-                        s -> s.getStudentId(),
-                        s -> s.getStudentMarks() >= 40 ? "Pass" : "Fail"
-                ));
+                        s -> s.getStudentId(), s -> s.getStudentMarks() >= 40 ? "Pass" : "Fail"));
 
         System.out.println("Student marks Pass/Fail:");
-        passFailMap.forEach((id, result) -> System.out.println("Student ID " + id + ": " + result));
+        passFailMap.forEach((id, marks) -> System.out.println("Student ID " + id + ": " + marks));
+
         System.out.println();
     }
 }
