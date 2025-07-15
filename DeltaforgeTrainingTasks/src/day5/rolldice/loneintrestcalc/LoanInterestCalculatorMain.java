@@ -1,6 +1,6 @@
-package day4.rolldice.loneintrestcalc;
+package day5.rolldice.loneintrestcalc;
 
-import day4.rolldice.loneintrestcalc.exception.DateException;
+import day5.rolldice.loneintrestcalc.exception.DateException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

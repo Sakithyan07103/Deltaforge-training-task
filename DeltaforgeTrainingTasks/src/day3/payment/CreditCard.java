@@ -1,4 +1,4 @@
-package day2.payment;
+package day3.payment;
 
 
 import java.util.Date;

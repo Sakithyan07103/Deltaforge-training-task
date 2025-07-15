@@ -1,4 +1,4 @@
-package day4.rolldice.loneintrestcalc.exception;
+package day5.rolldice.loneintrestcalc.exception;
 
 public class LoanAmountLimitException extends RuntimeException {
     public LoanAmountLimitException(String message) {

@@ -1,4 +1,4 @@
-package day4.rolldice.threedayslater;
+package day5.rolldice.threedayslater;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

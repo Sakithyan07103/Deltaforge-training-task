@@ -1,8 +1,8 @@
-package day4.rolldice.loneintrestcalc;
+package day5.rolldice.loneintrestcalc;
 
-import day4.rolldice.loneintrestcalc.exception.DateException;
-import day4.rolldice.loneintrestcalc.exception.LoanAmountLimitException;
-import day4.rolldice.loneintrestcalc.exception.LoanDurationLimitException;
+import day5.rolldice.loneintrestcalc.exception.DateException;
+import day5.rolldice.loneintrestcalc.exception.LoanAmountLimitException;
+import day5.rolldice.loneintrestcalc.exception.LoanDurationLimitException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

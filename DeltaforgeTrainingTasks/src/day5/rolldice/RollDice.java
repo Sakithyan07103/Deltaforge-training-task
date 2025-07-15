@@ -1,4 +1,4 @@
-package day4.rolldice;
+package day5.rolldice;
 
 import java.util.Scanner;
 
