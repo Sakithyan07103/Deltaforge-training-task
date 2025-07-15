@@ -65,7 +65,6 @@ public class DisplayStudents {
 
         System.out.println("Student marks Pass/Fail:");
         passFailMap.forEach((id, marks) -> System.out.println("Student ID " + id + ": " + marks));
-
         System.out.println();
     }
 }
