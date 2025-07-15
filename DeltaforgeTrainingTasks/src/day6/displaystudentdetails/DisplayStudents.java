@@ -2,7 +2,6 @@ package day6.displaystudentdetails;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class DisplayStudents {
     static Student sakithyan = new Student(101, "Sakithyan", 30);
@@ -62,7 +61,7 @@ public class DisplayStudents {
     public static void displayPassOrFail() {
         Map<Integer, String> passFailMap = students.stream()
                 .collect(Collectors.toMap(
-                        Student::getStudentId,
+                        s -> s.getStudentId(),
                         s -> s.getStudentMarks() >= 40 ? "Pass" : "Fail"
                 ));
 
@@ -70,5 +69,4 @@ public class DisplayStudents {
         passFailMap.forEach((id, result) -> System.out.println("Student ID " + id + ": " + result));
         System.out.println();
     }
-
 }
