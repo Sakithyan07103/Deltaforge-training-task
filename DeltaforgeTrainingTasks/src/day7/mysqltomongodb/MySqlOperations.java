@@ -8,7 +8,7 @@ public class MySqlOperations {
     private static final String sqlUser = "root";
     private static final String sqlPass = "1234";
     static Connection con;
-    
+
     public  void mySqlReadAll() throws SQLException {
         con = DriverManager.getConnection(sqlUrl,sqlUser,sqlPass);
         Statement st = con.createStatement();

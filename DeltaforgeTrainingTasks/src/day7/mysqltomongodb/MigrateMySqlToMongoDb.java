@@ -7,7 +7,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import java.sql.*;
 
-public class migrateMySqlToMongoDb {
+public class MigrateMySqlToMongoDb {
     private static final String mysqlUrl = "jdbc:mysql://localhost:3306/sample";
     private static final String mysqlUser = "root";
     private static final String mysqlPass = "1234";
@@ -21,7 +21,6 @@ public class migrateMySqlToMongoDb {
     }
 
     public static void migrateStudents() {
-
         try (
                 Connection mysqlConn = DriverManager.getConnection(mysqlUrl, mysqlUser, mysqlPass);
                 MongoClient mongoClient = MongoClients.create(mongoUri)
