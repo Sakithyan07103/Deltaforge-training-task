@@ -1,26 +1,17 @@
 package day4.apprisal;
 
 public class EmployeeApprisalMain {
+
     public static void main(String[] args) {
-
-
         Employees saki = new Staff(1, "sakithyan", "junior", 10000, 2);
         Employees rohini = new Senior(2, "Rohini", "senior", 30000,5);
         Employees prasad = new Manager(3, "Prasad", "Manager",100000, 3);
-
 
         saki.getEmployeeDetail(saki, "detailed");
         saki.getEmployeeApprisal(saki);
         System.out.println("\n");
         rohini.getEmployeeDetail(rohini);
         rohini.getEmployeeApprisal(rohini);
-//        System.out.println("\n");
-//        rohini.getEmployeeDetail(prasad);
-//        prasad.getEmployeeApprisal(prasad);
-//
-//        System.out.println("\n");
-
-        //getAllEmployeeDetail();
 
     }
 
@@ -32,8 +23,8 @@ public class EmployeeApprisalMain {
 
         getAllEmployeeDetail();
 
-        for (int i = 0; i < emp.length ; i++) {
-            System.out.println(emp[i].toString() + "\n");
+        for (Employees employees : emp) {
+            System.out.println(employees.toString() + "\n");
         }
     }
 }
