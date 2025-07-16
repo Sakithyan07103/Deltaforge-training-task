@@ -132,7 +132,7 @@ public class MigrateMySqlToMongoDb {
                 System.out.println("Exiting. Thank you for using this application!");
                 break;
             }
-            
+
             System.out.println();
         }
     }

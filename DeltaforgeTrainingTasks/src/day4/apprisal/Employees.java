@@ -1,69 +1,35 @@
 package day4.apprisal;
 
+
+import com.mongodb.lang.Nullable;
+import lombok.*;
+import org.jetbrains.annotations.NotNull;
+
+@SuppressWarnings({"WeakerAcess","unused"})
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employees {
 
     private int empId;
+    @NotNull
     private String empName;
+    @NotNull
     private String empDesignation;
     private int empSalary;
     private int empRating;
 
-    public Employees(int empId, String empName, String empDesignation, int empSalary, int empRating) {
-        this.empId = empId;
-        this.empName = empName;
-        this.empDesignation = empDesignation;
-        this.empSalary = empSalary;
-        this.empRating = empRating;
-    }
 
-    public int getEmpId() {
-        return empId;
-    }
 
-    public void setEmpId(int empId) {
-        this.empId = empId;
-    }
-
-    public String getEmpName() {
-        return empName;
-    }
-
-    public void setEmpName(String empName) {
-        this.empName = empName;
-    }
-
-    public String getEmpDesignation() {
-        return empDesignation;
-    }
-
-    public void setEmpDesignation(String empDesignation) {
-        this.empDesignation = empDesignation;
-    }
-
-    public int getEmpSalary() {
-        return empSalary;
-    }
-
-    public void setEmpSalary(int empSalary) {
-        this.empSalary = empSalary;
-    }
-
-    public int getEmpRating() {
-        return empRating;
-    }
-
-    public void setEmpRating(int empRating) {
-        this.empRating = empRating;
-    }
-
-    public  void getEmployeeDetail(Employees emp) {
+    public  void getEmployeeDetail(@NotNull Employees emp) {
         System.out.println("Employee Id: " + emp.getEmpId());
         System.out.println("Employee Name: " + emp.getEmpName());
         System.out.println("Employee Designation: " + emp.getEmpDesignation());
     }
 
-    public  void getEmployeeDetail(Employees emp, String detailed) {
-        if (detailed.contains("detailed")) {
+    public  void getEmployeeDetail(@NotNull Employees emp, @Nullable String detailed) {
+        if (detailed != null && detailed.contains("detailed")) {
             System.out.println("Employee Id: " + emp.getEmpId());
             System.out.println("Employee Name: " + emp.getEmpName());
             System.out.println("Employee Designation: " + emp.getEmpDesignation());
@@ -72,7 +38,7 @@ public class Employees {
         }
     }
 
-    public void getEmployeeApprisal(Employees emp) {
+    public void getEmployeeApprisal(@NotNull Employees emp) {
         System.out.println("The apprisal for the employee is: " + emp.getEmpSalary() + " + hike");
     }
 }

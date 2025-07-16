@@ -9,18 +9,18 @@ public class EmployeeApprisalMain {
         Employees prasad = new Manager(3, "Prasad", "Manager",100000, 3);
 
 
-//        saki.getEmployeeDetail(saki, "detailed");
-//        saki.getEmployeeApprisal(saki);
-//        System.out.println("\n");
-//        rohini.getEmployeeDetail(rohini);
-//        rohini.getEmployeeApprisal(rohini);
+        saki.getEmployeeDetail(saki, "detailed");
+        saki.getEmployeeApprisal(saki);
+        System.out.println("\n");
+        rohini.getEmployeeDetail(rohini);
+        rohini.getEmployeeApprisal(rohini);
 //        System.out.println("\n");
 //        rohini.getEmployeeDetail(prasad);
 //        prasad.getEmployeeApprisal(prasad);
 //
 //        System.out.println("\n");
 
-        getAllEmployeeDetail();
+        //getAllEmployeeDetail();
 
     }
 
