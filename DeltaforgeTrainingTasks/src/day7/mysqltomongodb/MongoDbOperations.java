@@ -23,15 +23,30 @@ public class MongoDbOperations {
          }
     }
 
-    public void mongoDbCreate(int id, String name, String dept, double salary) {
+    public void mongoDbRead(int id) {
+        MongoClient mongoClient = MongoClients.create(mongoUri);
+        MongoDatabase database = mongoClient.getDatabase(mongoDbName);
+        MongoCollection<Document> collection = database.getCollection(mongoCollectionName);
+
+        Document query = new Document("sid", id);
+        Document result = collection.find(query).first();
+
+        if (result != null) {
+            System.out.println("Student found: " + result.toJson());
+        } else {
+            System.out.println("No student found with sid: " + id);
+        }
+    }
+
+    public void mongoDbCreate(int id, String name, int roll) {
         mongoClient = MongoClients.create(mongoUri);
         MongoDatabase database = mongoClient.getDatabase(mongoDbName);
         MongoCollection<Document> collection = database.getCollection(mongoCollectionName);
         Document doc = new Document("sid", id)
                 .append("sname", name)
-                .append("sroll", dept);
+                .append("sroll", roll);
         collection.insertOne(doc);
-        System.out.println("Inserted employee");
+        System.out.println("Inserted student");
     }
 
     public void mongoDbUpdate(int id, String name) {
@@ -43,7 +58,7 @@ public class MongoDbOperations {
                 Updates.set("sname", name)
         );
         collection.updateOne(filter, updates);
-        System.out.println("Updated employee");
+        System.out.println("Updated student");
     }
 
     public void mongoDbDelete(int id) {
@@ -52,8 +67,6 @@ public class MongoDbOperations {
         MongoCollection<Document> collection = database.getCollection(mongoCollectionName);
         Bson filter = Filters.eq("sid", id);
         collection.deleteOne(filter);
-        System.out.println("Deleted employee");
+        System.out.println("Deleted student");
     }
-
-
 }
