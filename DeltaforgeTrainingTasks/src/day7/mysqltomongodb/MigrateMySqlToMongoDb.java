@@ -19,14 +19,13 @@ public class MigrateMySqlToMongoDb {
     private static final String mongoCollectionName = "students";
 
     public static void main(String[] args) throws SQLException {
-
-        System.out.println("Where you want to do operations: ");
-        System.out.println("1. MySql");
-        System.out.println("2. MongoDb");
+        System.out.println("Where do you want to perform operations?");
+        System.out.println("1. MySQL");
+        System.out.println("2. MongoDB");
         System.out.print("Press any number: ");
         int num = sc.nextInt();
 
-        if (num == 1){
+        if (num == 1) {
             mySqlOperations();
         } else if (num == 2) {
             mongoDbOperations();
@@ -37,6 +36,7 @@ public class MigrateMySqlToMongoDb {
 
     public static void mySqlOperations() throws SQLException {
         MySqlOperations mysql = new MySqlOperations();
+
         while (true) {
             System.out.println("==== List of operation you can do to the table ====");
             System.out.println(" 1. view all Students");
@@ -48,6 +48,7 @@ public class MigrateMySqlToMongoDb {
 
             System.out.print("Press any number: ");
             int num = sc.nextInt();
+            System.out.println();
             if (num == 1) {
                 System.out.println("The list of employees are as follows:");
                 mysql.mySqlReadAll();
@@ -56,20 +57,20 @@ public class MigrateMySqlToMongoDb {
                 int id = sc.nextInt();
                 mysql.mySqlRead(id);
             } else if (num == 3) {
-                System.out.print("Enter the Id: ");
+                System.out.print("Enter the ID: ");
                 int id = sc.nextInt();
-                System.out.print("Enter a name: ");
-                String name = sc.next();
                 sc.nextLine();
+                System.out.print("Enter a name: ");
+                String name = sc.nextLine();
                 System.out.print("Enter a roll number: ");
                 int roll = sc.nextInt();
                 mysql.mySqlCreate(id, name, roll);
             } else if (num == 4) {
                 System.out.print("Enter the ID: ");
                 int id = sc.nextInt();
-                System.out.print("Enter a name: ");
-                String name = sc.next();
                 sc.nextLine();
+                System.out.print("Enter a name: ");
+                String name = sc.nextLine();
                 mysql.mySqlUpdate(name, id);
             } else if (num == 5) {
                 System.out.print("Enter the ID: ");
@@ -80,12 +81,14 @@ public class MigrateMySqlToMongoDb {
                 System.out.println("Exiting. Thank you for using this application!");
                 break;
             }
+
             System.out.println();
         }
     }
 
     public static void mongoDbOperations() {
         MongoDbOperations mongodb = new MongoDbOperations();
+
         while (true) {
             System.out.println("==== List of operation you can do to the file ====");
             System.out.println(" 1. view all Students");
@@ -108,6 +111,7 @@ public class MigrateMySqlToMongoDb {
             } else if (num == 3) {
                 System.out.print("Enter the Id: ");
                 int id = sc.nextInt();
+                sc.nextLine();
                 System.out.print("Enter a name: ");
                 String name = sc.nextLine();
                 System.out.print("Enter a roll number: ");
@@ -116,9 +120,9 @@ public class MigrateMySqlToMongoDb {
             } else if (num == 4) {
                 System.out.print("Enter the ID: ");
                 int id = sc.nextInt();
-                System.out.print("Enter a name: ");
-                String name = sc.next();
                 sc.nextLine();
+                System.out.print("Enter a name: ");
+                String name = sc.nextLine();
                 mongodb.mongoDbUpdate(id,name);
             } else if (num == 5) {
                 System.out.print("Enter the ID: ");
@@ -128,6 +132,7 @@ public class MigrateMySqlToMongoDb {
                 System.out.println("Exiting. Thank you for using this application!");
                 break;
             }
+            
             System.out.println();
         }
     }
