@@ -76,7 +76,6 @@ public class MigrateMySqlToMongoDb {
                 System.out.print("Enter the ID: ");
                 int id = sc.nextInt();
                 mysql.mySqlDelete(id);
-                break;
             } else if (num == 6) {
                 System.out.println("Exiting. Thank you for using this application!");
                 break;
