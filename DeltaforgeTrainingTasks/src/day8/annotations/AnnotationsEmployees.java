@@ -9,7 +9,6 @@ import org.jetbrains.annotations.Nullable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class AnnotationsEmployees {
 
     private int empId;
@@ -21,6 +20,8 @@ public class AnnotationsEmployees {
     private int empRating;
 
     public  void getEmployeeDetail(@NotNull AnnotationsEmployees emp) {
+        System.out.println();
+        System.out.println("Details of the Employee " + emp.empName + ":");
         System.out.println("Employee Id: " + emp.getEmpId());
         System.out.println("Employee Name: " + emp.getEmpName());
         System.out.println("Employee Designation: " + emp.getEmpDesignation());
@@ -28,6 +29,8 @@ public class AnnotationsEmployees {
 
     public  void getEmployeeDetail(@NotNull AnnotationsEmployees emp, @Nullable String detailed) {
         if (detailed != null && detailed.contains("detailed")) {
+            System.out.println();
+            System.out.println("Details of the Employee " + emp.empName + ":");
             System.out.println("Employee Id: " + emp.getEmpId());
             System.out.println("Employee Name: " + emp.getEmpName());
             System.out.println("Employee Designation: " + emp.getEmpDesignation());

@@ -2,7 +2,6 @@ package day8.annotations;
 
 import lombok.*;
 
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

@@ -10,6 +10,6 @@
     <orderEntry type="library" name="mysql-connector-java-8.0.28" level="project" />
     <orderEntry type="library" name="mongodb-jdbc-2.3.0-all" level="project" />
     <orderEntry type="library" name="annotations-24.0.1" level="project" />
-    <orderEntry type="library" name="lombok-1.18.24" level="project" />
+    <orderEntry type="library" name="lombok-1.18.38" level="project" />
   </component>
 </module>
