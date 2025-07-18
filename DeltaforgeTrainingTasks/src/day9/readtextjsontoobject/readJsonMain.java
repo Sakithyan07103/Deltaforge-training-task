@@ -1,4 +1,4 @@
-package day9.readjson;
+package day9.readtextjsontoobject;
 
 import java.io.File;
 import java.io.FileWriter;

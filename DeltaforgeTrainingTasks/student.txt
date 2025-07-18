@@ -1,6 +1,9 @@
 {
-  "name": "Shwetha",
-  "age": 24,
-  "branch": "CSE",
-  "skills": ["Java", "SQL"]
+  "name": "Sakithyan",
+  "age": 22,
+  "detail": {
+    "detail1": "additional details",
+    "id": 108
+  }
 }
+

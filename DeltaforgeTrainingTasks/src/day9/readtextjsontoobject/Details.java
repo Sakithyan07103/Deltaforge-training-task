@@ -1,4 +1,4 @@
-package day9.readjson;
+package day9.readtextjsontoobject;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
