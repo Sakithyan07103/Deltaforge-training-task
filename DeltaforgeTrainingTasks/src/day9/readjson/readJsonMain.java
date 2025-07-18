@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-
 public class readJsonMain {
     private static final String name = System.getProperty("user.dir") + "/sample.txt";
 
