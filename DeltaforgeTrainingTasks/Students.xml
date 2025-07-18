@@ -1,0 +1,8 @@
+<Student>
+    <name>Sakithyan</name>
+    <age>22</age>
+    <Detail>
+        <details>Additional details</details>
+        <id>108</id>
+    </Detail>
+</Student>
