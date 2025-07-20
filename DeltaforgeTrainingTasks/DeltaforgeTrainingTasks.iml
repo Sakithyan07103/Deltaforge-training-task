@@ -19,5 +19,6 @@
     <orderEntry type="library" name="woodstox-core-7.1.0-javadoc" level="project" />
     <orderEntry type="library" name="woodstox-core-7.1.0" level="project" />
     <orderEntry type="library" name="stax2-api-4.2.1" level="project" />
+    <orderEntry type="library" name="itextpdf-5.5.13.3" level="project" />
   </component>
 </module>
