@@ -110,7 +110,7 @@ public class PdfStockBroker {
             if (stocks.getStockId() == id) {
                 currentCustomer.sellCustomerStock(stocks, quantity);
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 
