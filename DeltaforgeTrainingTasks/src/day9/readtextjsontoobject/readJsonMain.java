@@ -1,17 +1,20 @@
 package day9.readtextjsontoobject;
 
+import day9.readtextjsontoobject.constants.Constants;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class readJsonMain {
-    private static final String name = System.getProperty("user.dir") + "/sample.txt";
+    private static final String name = System.getProperty("user.dir") + Constants.sampleTxtFile;
 
     public static void main(String[] args) {
         System.out.println("Working Directory: " + System.getProperty("user.dir"));
         createOrUpdateFile("Hello from Java!");
         readFile();
+        //deleteFile();
     }
 
     public static void createOrUpdateFile(String content) {

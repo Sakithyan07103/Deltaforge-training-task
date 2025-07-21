@@ -2,7 +2,8 @@ package day9.readtextjsontoobject;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import day10.readxmltoobject.constants.Constants;
+import day9.readtextjsontoobject.constants.Constants;
+
 
 import java.io.File;
 
