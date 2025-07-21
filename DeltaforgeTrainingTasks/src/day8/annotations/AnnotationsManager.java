@@ -6,9 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AnnotationsManager extends AnnotationsEmployees
-{
-
+public class AnnotationsManager extends AnnotationsEmployees {
     int hike;
 
     public AnnotationsManager(int empId, String empName, String empDesignation, int empSalary , int empRating) {

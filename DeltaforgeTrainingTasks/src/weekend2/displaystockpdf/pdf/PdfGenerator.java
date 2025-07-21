@@ -5,13 +5,15 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import weekend2.displaystockpdf.Customer;
 import weekend2.displaystockpdf.PdfStock;
+
 import java.io.FileOutputStream;
 
 public class PdfGenerator {
     public static void generateCustomerPortfolioPDF(Customer customer) {
+        String customerNamePdfFile = customer.getUsername() + "_portfolio.pdf";
         Document document = new Document();
         try {
-            PdfWriter.getInstance(document, new FileOutputStream(customer.getUsername() + "_portfolio.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream(customerNamePdfFile));
             document.open();
             document.add(new Paragraph("Portfolio for " + customer.getUsername()));
 

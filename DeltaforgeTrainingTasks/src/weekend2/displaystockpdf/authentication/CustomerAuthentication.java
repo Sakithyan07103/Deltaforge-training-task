@@ -1,7 +1,6 @@
 package weekend2.displaystockpdf.authentication;
 
 import weekend2.displaystockpdf.Customer;
-
 import java.util.HashMap;
 import java.util.Map;
 

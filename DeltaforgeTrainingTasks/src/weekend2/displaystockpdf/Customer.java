@@ -43,20 +43,23 @@ public class Customer {
     public void sellCustomerStock(PdfStock stock, int quantity) {
         boolean alreadyOwned = false;
         for (PdfStock s : myStocks) {
-            if (s.getStockId() == stock.getStockId()){
+            if (s.getStockId() == stock.getStockId()) {
                 s.sellStock(quantity);
                 alreadyOwned = true;
                 break;
             }
+
             if (!alreadyOwned) {
                 System.out.println("You didn't own this stock to sell! ");
             }
+
             System.out.println("Stock has been successfully sold! ");
         }
     }
 
     public void viewCustomerPortfolio() {
         System.out.println("Portfolio of: " + username);
+
         if (myStocks.isEmpty()){
             System.out.println("you own now stocks!");
         } else {
@@ -64,6 +67,7 @@ public class Customer {
                 s.viewMyStocks();
             }
         }
+
         System.out.println();
     }
 

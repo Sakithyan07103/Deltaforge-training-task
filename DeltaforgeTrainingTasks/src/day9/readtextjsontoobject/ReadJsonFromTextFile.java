@@ -2,13 +2,14 @@ package day9.readtextjsontoobject;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import day10.readxmltoobject.constants.Constants;
 
 import java.io.File;
 
 public class ReadJsonFromTextFile {
     public static void main(String[] args) {
         try {
-            File file = new File("student.txt"); // Ensure this file exists and contains valid JSON
+            File file = new File(Constants.studentTxtFileName);
 
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(file);
@@ -27,9 +28,5 @@ public class ReadJsonFromTextFile {
         } catch (Exception e) {
             System.out.println("Error reading or parsing file: " + e.getMessage());
         }
-    }
-
-    public static void sample(){
-
     }
 }

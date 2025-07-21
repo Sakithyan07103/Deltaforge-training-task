@@ -9,15 +9,16 @@ public class ReadObjDisplayXml {
         Scanner sc = new Scanner(System.in);
         Detail detail = new Detail();
         Student student = new Student();
-        System.out.println("Enter your Name: ");
+        System.out.print("Enter your Name: ");
         String name = sc.nextLine();
-        System.out.println("Enter your age: ");
+        System.out.print("Enter your age: ");
         int age = sc.nextInt();
-        System.out.println("Enter you Details: ");
+        System.out.print("Enter you Details: ");
         String details = sc.nextLine();
         sc.next();
-        System.out.println("Enter your id: ");
+        System.out.print("Enter your id: ");
         int id = sc.nextInt();
+        sc.nextLine();
 
         detail.setDetails(details);
         detail.setId(id);
@@ -31,7 +32,7 @@ public class ReadObjDisplayXml {
            mapper.setDefaultUseWrapper(false);
            String xml = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(student);
            System.out.println(xml);
-       } catch (Exception e){
+       } catch (Exception e) {
            e.printStackTrace();
        }
     }

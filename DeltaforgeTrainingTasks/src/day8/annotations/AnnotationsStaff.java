@@ -7,7 +7,6 @@ import lombok.*;
 @Getter
 @Setter
 public class AnnotationsStaff extends AnnotationsEmployees {
-
     int hike;
 
     public AnnotationsStaff(int empId, String empName, String empDesignation, int empSalary, int empRating) {

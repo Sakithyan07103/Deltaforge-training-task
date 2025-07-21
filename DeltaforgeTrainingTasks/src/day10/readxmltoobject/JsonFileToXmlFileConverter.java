@@ -4,13 +4,14 @@ import org.json.simple.JSONObject;
 import java.io.IOException;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import day10.readxmltoobject.constants.Constants;
 import java.io.FileReader;
 import java.io.FileWriter;
 
 public class JsonFileToXmlFileConverter {
     public static void main(String[] args) throws IOException, ParseException {
         try {
-            FileReader reader = new FileReader("day9.json");
+            FileReader reader = new FileReader(Constants.day9JsonFile);
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
 
@@ -26,7 +27,7 @@ public class JsonFileToXmlFileConverter {
 
             xmlBuilder.append("</root>\n");
 
-            FileWriter writer = new FileWriter("output.xml");
+            FileWriter writer = new FileWriter(Constants.outPutXmlFile);
             writer.write(xmlBuilder.toString());
             writer.close();
 

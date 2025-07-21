@@ -64,20 +64,20 @@ public class PdfStockBroker {
             System.out.print("Password: ");
             String password = sc.nextLine();
 
-                if (option == 1) {
-                    currentCustomer = CustomerAuthentication.customerLogin(username, password);
-                } else if (option == 2) {
-                    CustomerAuthentication.customerRegister(username, password);
+            if (option == 1) {
+                currentCustomer = CustomerAuthentication.customerLogin(username, password);
+            } else if (option == 2) {
+                CustomerAuthentication.customerRegister(username, password);
             }
         }
     }
 
     public static void viewAllStocks() {
-
         for (PdfStock stocks : stockList) {
             stocks.viewAllStocks();
             System.out.println("---");
         }
+
         System.out.println("\n");
     }
 
@@ -97,6 +97,7 @@ public class PdfStockBroker {
                 currentCustomer.buyCustomerStock(stocks, quantity);
             }
         }
+
         System.out.println();
     }
 

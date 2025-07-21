@@ -1,6 +1,5 @@
 package day10.readxmltoobject;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.AllArgsConstructor;
@@ -13,7 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @JacksonXmlRootElement(localName = "Student")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Student {
     @JacksonXmlProperty(localName = "name")
     private String name;

@@ -9,9 +9,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@JacksonXmlRootElement(localName = "Detail")
 public class Detail {
     @JacksonXmlProperty(localName = "details")
     private String details;
