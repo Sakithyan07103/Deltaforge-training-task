@@ -10,10 +10,6 @@ import javax.annotation.processing.Generated;
 
 @Entity
 @Table(name = "students")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Students {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
