@@ -1,7 +1,6 @@
 package com.day11.portfolio_viewer.service;
 
-import com.day11.portfolio_viewer.dto.Stock;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.day11.portfolio_viewer.dto.StockDto;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,15 +9,14 @@ import java.util.List;
 @Service
 public class StockService {
 
-    public List<Stock> viewAllStocks() {
-        //return  stock.viewAllStocks();
-        List<Stock> stocks = new ArrayList<>();
+    public List<StockDto> viewAllStocks() {
+        List<StockDto> stocks = new ArrayList<>();
 
-        stocks.add(new Stock(001, "Apple", 183));
-        stocks.add(new Stock(002, "Google", 2750));
-        stocks.add(new Stock(003, "Amazon", 134));
+        stocks.add(new StockDto(101, "Apple", 183));
+        stocks.add(new StockDto(202, "Google", 2750));
+        stocks.add(new StockDto(303, "Amazon", 134));
 
-        for (Stock stock : stocks) {
+        for (StockDto stock : stocks) {
             System.out.println("ID: " + stock.getStockId());
             System.out.println("Name: " + stock.getStockName());
             System.out.println("Price: " + stock.getStockPrice());

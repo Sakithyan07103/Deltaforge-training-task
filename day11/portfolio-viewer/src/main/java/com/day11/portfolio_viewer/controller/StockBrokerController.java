@@ -1,6 +1,6 @@
 package com.day11.portfolio_viewer.controller;
 
-import com.day11.portfolio_viewer.dto.Stock;
+import com.day11.portfolio_viewer.dto.StockDto;
 import com.day11.portfolio_viewer.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ public class StockBrokerController {
     StockService stockService;
 
     @GetMapping("")
-    public List<Stock> viewAllStocks() {
+    public List<StockDto> viewAllStocks() {
         return stockService.viewAllStocks();
     }
 }
