@@ -1,0 +1,3 @@
+Id of the employe is: 0
+Name of the Employee is: null
+Age of the Employee is: 0
