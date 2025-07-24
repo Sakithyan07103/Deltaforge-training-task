@@ -7,9 +7,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
+
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @Service
 public class EmployeeService {
@@ -46,10 +51,12 @@ public class EmployeeService {
         return writer;
     }
 
-    public String updateXml(String filename, Employee emp) throws JsonProcessingException {
+    public String updateXml(String filename, Employee emp) throws IOException {
         XmlMapper mapper = new XmlMapper();
+        String xmlContent = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(emp);
         System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(emp));
-        return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(emp);
+        Files.write(Paths.get(filename), xmlContent.getBytes(StandardCharsets.UTF_8));
+        return xmlContent;
     }
 
 }
