@@ -7,7 +7,10 @@ import java.util.Optional;
 
 public interface StudentService {
     public Students createStudent(String name, int roll);
+
     public Students createStudentWithId(int id, String name, int roll);
+
     public List<Students> getAllStudents();
+
     public Optional<Students> getStudentById(int id);
 }

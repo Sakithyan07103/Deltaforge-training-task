@@ -8,14 +8,14 @@ import com.day15.students_mark_portal.repo.ExamRepository;
 import com.day15.students_mark_portal.repo.MarkRepository;
 import com.day15.students_mark_portal.repo.StudentRepository;
 import com.day15.students_mark_portal.repo.SubjectRepository;
+import com.day15.students_mark_portal.service.serviceinterface.MarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MarkServiceImpl {
+public class MarkServiceImpl implements MarkService {
     @Autowired
     MarkRepository markRepo;
 
