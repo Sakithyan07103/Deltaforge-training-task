@@ -29,9 +29,12 @@ public class MarkServiceImpl implements MarkService {
     ExamRepository examRepo;
 
     public Marks createMarks(int stdId, int subId, int examId, double score) {
-        Students std = stdRepo.findById(stdId).orElseThrow(() -> new RuntimeException("No student with ID number: " + stdId));
-        Subjects sub = subRepo.findById(subId).orElseThrow(() -> new RuntimeException("No subject with ID number: " + subId));
-        Exams exam = examRepo.findById(examId).orElseThrow(() -> new RuntimeException("No exam with ID number: " + examId));
+        Students std = stdRepo.findById(stdId).orElseThrow(() ->
+                new RuntimeException("No student with ID number: " + stdId));
+        Subjects sub = subRepo.findById(subId).orElseThrow(() ->
+                new RuntimeException("No subject with ID number: " + subId));
+        Exams exam = examRepo.findById(examId).orElseThrow(() ->
+                new RuntimeException("No exam with ID number: " + examId));
         Marks marks = new Marks();
         marks.setStudents(std);
         marks.setSubjects(sub);
@@ -56,9 +59,12 @@ public class MarkServiceImpl implements MarkService {
         if (optMarks.isPresent()) {
             Marks mark = optMarks.get();
 
-            Students std = stdRepo.findById(stdId).orElseThrow(() -> new RuntimeException("No student with ID number: " + stdId));
-            Subjects sub = subRepo.findById(subId).orElseThrow(() -> new RuntimeException("No subject with ID number: " + subId));
-            Exams exam = examRepo.findById(examId).orElseThrow(() -> new RuntimeException("No exam with ID number: " + examId));
+            Students std = stdRepo.findById(stdId).orElseThrow(() ->
+                    new RuntimeException("No student with ID number: " + stdId));
+            Subjects sub = subRepo.findById(subId).orElseThrow(() ->
+                    new RuntimeException("No subject with ID number: " + subId));
+            Exams exam = examRepo.findById(examId).orElseThrow(() ->
+                    new RuntimeException("No exam with ID number: " + examId));
 
             mark.setId(id);
             mark.setStudents(std);
@@ -68,7 +74,8 @@ public class MarkServiceImpl implements MarkService {
             Marks updatedMark = markRepo.save(mark);
             return Optional.of(updatedMark);
         } else {
-            return Optional.of(markRepo.findById(id).orElseThrow(() -> new RuntimeException(id + "is not found, can't be updated")));
+            return Optional.of(markRepo.findById(id).orElseThrow(() ->
+                    new RuntimeException(id + "is not found, can't be updated")));
         }
     }
 
