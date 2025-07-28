@@ -16,6 +16,8 @@ public class Students {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int stdId;
+
     private String stdName;
+
     private int stdRoll;
 }

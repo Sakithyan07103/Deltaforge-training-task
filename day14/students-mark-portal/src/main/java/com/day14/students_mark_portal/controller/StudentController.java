@@ -14,9 +14,9 @@ public class StudentController {
     @Autowired
     StudentServiceImpl service;
 
-    @PostMapping("/{name}/{roll}")
-    public Students createStudent(@PathVariable String name, @PathVariable int roll) {
-        return service.createStudent( name, roll);
+    @PostMapping("")
+    public Students createStudent(@RequestBody Students students) {
+        return service.createStudent(students.getStdName() , students.getStdRoll());
     }
 
     @GetMapping("")

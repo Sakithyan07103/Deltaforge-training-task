@@ -16,5 +16,6 @@ public class Exams {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int examId;
+
     private String examName;
 }
