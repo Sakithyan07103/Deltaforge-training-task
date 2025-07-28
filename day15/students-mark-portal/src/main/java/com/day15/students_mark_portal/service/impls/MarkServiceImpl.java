@@ -1,5 +1,6 @@
 package com.day15.students_mark_portal.service.impls;
 
+import com.day15.students_mark_portal.dto.MarksDTO;
 import com.day15.students_mark_portal.model.Exams;
 import com.day15.students_mark_portal.model.Marks;
 import com.day15.students_mark_portal.model.Students;
@@ -9,6 +10,7 @@ import com.day15.students_mark_portal.repo.MarkRepository;
 import com.day15.students_mark_portal.repo.StudentRepository;
 import com.day15.students_mark_portal.repo.SubjectRepository;
 import com.day15.students_mark_portal.service.serviceinterface.MarkService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -28,54 +30,49 @@ public class MarkServiceImpl implements MarkService {
     @Autowired
     ExamRepository examRepo;
 
-    public Marks createMarks(int stdId, int subId, int examId, double score) {
-        Students std = stdRepo.findById(stdId).orElseThrow(() ->
-                new RuntimeException("No student with ID number: " + stdId));
-        Subjects sub = subRepo.findById(subId).orElseThrow(() ->
-                new RuntimeException("No subject with ID number: " + subId));
-        Exams exam = examRepo.findById(examId).orElseThrow(() ->
-                new RuntimeException("No exam with ID number: " + examId));
-        Marks marks = new Marks();
-        marks.setStudents(std);
-        marks.setSubjects(sub);
-        marks.setExams(exam);
-        marks.setScore(score);
-        return markRepo.save(marks);
+    public Marks createMarks(MarksDTO marksDTO) {
+        Students std = stdRepo.findById(marksDTO.getStudentId()).orElseThrow(() ->
+                new EntityNotFoundException("No student with ID number: " + marksDTO.getStudentId()));
+        Subjects sub = subRepo.findById(marksDTO.getSubjectId()).orElseThrow(() ->
+                new EntityNotFoundException("No subject with ID number: " + marksDTO.getSubjectId()));
+        Exams exam = examRepo.findById(marksDTO.getExamsId()).orElseThrow(() ->
+                new EntityNotFoundException("No exam with ID number: " + marksDTO.getExamsId()));
+        Marks mark = new Marks();
+        mark.setStudents(std);
+        mark.setSubjects(sub);
+        mark.setExams(exam);
+        mark.setScore(marksDTO.getScore());
+        return markRepo.save(mark);
     }
-
-
 
     public List<Marks> getAllMarks() {
         return markRepo.findAll();
     }
 
-    public Optional<Marks> getMarksById(int id) {
-        return Optional.of(markRepo.findById(id).orElseThrow(() -> new RuntimeException(id + "is not found")));
+    public Marks getMarksById(int id) {
+        return markRepo.findById(id).orElseThrow(() -> new EntityNotFoundException(id + "is not found"));
     }
 
-    public Optional<Marks> updateMarks(int id, int stdId, int subId, int examId, double score) {
-        Optional<Marks> optMarks = markRepo.findById(id);
-
+    public Marks updateMarks(MarksDTO marksDTO) {
+        Optional<Marks> optMarks = markRepo.findById(marksDTO.getId());
         if (optMarks.isPresent()) {
             Marks mark = optMarks.get();
 
-            Students std = stdRepo.findById(stdId).orElseThrow(() ->
-                    new RuntimeException("No student with ID number: " + stdId));
-            Subjects sub = subRepo.findById(subId).orElseThrow(() ->
-                    new RuntimeException("No subject with ID number: " + subId));
-            Exams exam = examRepo.findById(examId).orElseThrow(() ->
-                    new RuntimeException("No exam with ID number: " + examId));
+            Students std = stdRepo.findById(marksDTO.getStudentId()).orElseThrow(() ->
+                    new EntityNotFoundException("No student with ID number: " + marksDTO.getStudentId()));
+            Subjects sub = subRepo.findById(marksDTO.getSubjectId()).orElseThrow(() ->
+                    new EntityNotFoundException("No subject with ID number: " + marksDTO.getSubjectId()));
+            Exams exam = examRepo.findById(marksDTO.getExamsId()).orElseThrow(() ->
+                    new EntityNotFoundException("No exam with ID number: " + marksDTO.getExamsId()));
 
-            mark.setId(id);
             mark.setStudents(std);
             mark.setSubjects(sub);
             mark.setExams(exam);
 
-            Marks updatedMark = markRepo.save(mark);
-            return Optional.of(updatedMark);
+            return markRepo.save(mark);
         } else {
-            return Optional.of(markRepo.findById(id).orElseThrow(() ->
-                    new RuntimeException(id + "is not found, can't be updated")));
+            return markRepo.findById(marksDTO.getId()).orElseThrow(() ->
+                    new EntityNotFoundException(marksDTO.getId() + "is not found, can't be updated"));
         }
     }
 
@@ -84,7 +81,7 @@ public class MarkServiceImpl implements MarkService {
             markRepo.deleteById(id);
             return true;
         } else {
-            throw new RuntimeException(id + " is not found, can't be deleted");
+            throw new EntityNotFoundException(id + " is not found, can't be deleted");
         }
     }
 }

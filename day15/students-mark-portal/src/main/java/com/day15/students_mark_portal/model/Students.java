@@ -16,6 +16,10 @@ public class Students {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int stdId;
+
+    @Column(name = "student_name")
     private String stdName;
+
+    @Column(name = "student_roll_number")
     private int stdRoll;
 }

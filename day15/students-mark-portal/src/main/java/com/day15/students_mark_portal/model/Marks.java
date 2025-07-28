@@ -16,14 +16,19 @@ public class Marks {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @ManyToOne
     @JoinColumn(name = "stdId")
     private Students students;
+
     @ManyToOne
     @JoinColumn(name = "subId")
     private Subjects subjects;
+
     @ManyToOne
     @JoinColumn(name = "examId")
     private Exams exams;
+
+    @Column(name = "score")
     private double score;
 }

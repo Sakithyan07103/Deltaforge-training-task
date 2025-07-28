@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class ExamsDTO {
     private int examId;
+
     private String examName;
 }

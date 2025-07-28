@@ -16,5 +16,7 @@ public class Subjects {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int subId;
+
+    @Column(name = "Subject_name")
     private String subName;
 }

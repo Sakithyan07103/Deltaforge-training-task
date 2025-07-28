@@ -1,8 +1,10 @@
 package com.day15.students_mark_portal.service.impls;
 
+import com.day15.students_mark_portal.dto.StudentsDTO;
 import com.day15.students_mark_portal.repo.StudentRepository;
 import com.day15.students_mark_portal.model.Students;
 import com.day15.students_mark_portal.service.serviceinterface.StudentService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -13,18 +15,10 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     StudentRepository stdRepo;
 
-    public Students createStudent(String name, int roll) {
+    public Students createStudent(StudentsDTO studentsDTO) {
         Students std = new Students();
-        std.setStdName(name);
-        std.setStdRoll(roll);
-        return stdRepo.save(std);
-    }
-
-    public Students createStudentWithId(int id, String name, int roll) {
-        Students std = new Students();
-        std.setStdId(id);
-        std.setStdName(name);
-        std.setStdRoll(roll);
+        std.setStdName(studentsDTO.getStdName());
+        std.setStdRoll(studentsDTO.getStdRoll());
         return stdRepo.save(std);
     }
 
@@ -32,29 +26,29 @@ public class StudentServiceImpl implements StudentService {
         return stdRepo.findAll();
     }
 
-    public Optional<Students> getStudentById(int id) {
-        return Optional.of(stdRepo.findById(id).orElseThrow(() ->
-                new RuntimeException(id + "is not found")));
+    public Students getStudentById(int id) {
+        return stdRepo.findById(id).orElseThrow(() ->
+                new RuntimeException(id + "is not found"));
     }
 
-    public Optional<Students> getStudentByName(String stdName) {
-        return stdRepo.findStdBystdName(stdName);
+    public Students getStudentByName(String stdName) {
+        return stdRepo.findByStdName(stdName).orElseThrow(() ->
+                new EntityNotFoundException("No named called " + stdName));
     }
 
-    public Optional<Students> updateStudent(int id, String name, int roll) {
-        Optional<Students> students = stdRepo.findById(id);
+    public Students updateStudent(StudentsDTO studentsDTO) {
+        Optional<Students> students = stdRepo.findById(studentsDTO.getStdId());
 
         if (students.isPresent()) {
             Students std = students.get();
-            std.setStdId(id);
-            std.setStdName(name);
-            std.setStdRoll(roll);
+            std.setStdId(studentsDTO.getStdId());
+            std.setStdName(studentsDTO.getStdName());
+            std.setStdRoll(std.getStdRoll());
 
-            Students updatedStd = stdRepo.save(std);
-            return Optional.of(updatedStd);
+            return stdRepo.save(std);
         } else {
-            return Optional.of(stdRepo.findById(id).orElseThrow(() ->
-                    new RuntimeException(id + "is not found, can't be updated")));
+            return stdRepo.findById(studentsDTO.getStdId()).orElseThrow(() ->
+                    new EntityNotFoundException(studentsDTO.getStdId() + "is not found, can't be updated"));
         }
     }
 
@@ -63,7 +57,7 @@ public class StudentServiceImpl implements StudentService {
             stdRepo.deleteById(id);
             return true;
         } else {
-            throw new RuntimeException(id + " is not found, can't be deleted");
+            throw new EntityNotFoundException(id + " is not found, can't be deleted");
         }
     }
 

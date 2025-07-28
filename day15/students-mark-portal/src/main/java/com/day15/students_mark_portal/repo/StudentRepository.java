@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Students, Integer> {
-    Optional<Students> findStdBystdName(String stdName);
+    Optional<Students> findByStdName(String stdName);
 }
