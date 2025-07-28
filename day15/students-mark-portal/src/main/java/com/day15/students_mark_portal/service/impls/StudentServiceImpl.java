@@ -33,7 +33,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public Optional<Students> getStudentById(int id) {
-        return Optional.of(stdRepo.findById(id).orElseThrow(() -> new RuntimeException(id + "is not found")));
+        return Optional.of(stdRepo.findById(id).orElseThrow(() ->
+                new RuntimeException(id + "is not found")));
     }
 
     public Optional<Students> getStudentByName(String stdName) {
