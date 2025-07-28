@@ -1,4 +1,7 @@
 package com.weekend3.ecommerce_service.repository;
 
-public interface OrderItemRepository {
+import com.weekend3.ecommerce_service.model.OrderItem;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
 }
