@@ -9,18 +9,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductService {
+public class ProductServiceImpl {
     @Autowired
     ProductRepository productRepository;
 
     @Autowired
     ProductMapper productMapper;
 
-    public Product addProduct(String productName, int productPrice, int stockQuantity) {
+    public Product addProduct(ProductDTO productDTO) {
         Product product = new Product();
-        product.setProductName(productName);
-        product.setProductPrice(productPrice);
-        product.setStockQuantity(stockQuantity);
+        product.setProductName(productDTO.getProductName());
+        product.setProductPrice(productDTO.getProductPrice());
+        product.setStockQuantity(productDTO.getStockQuantity());
         return productRepository.save(product);
     }
 

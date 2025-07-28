@@ -21,5 +21,13 @@ public class OrderItem {
     @JoinColumn(name = "productId")
     private Product product;
 
+    @ManyToOne
+    @JoinColumn(name = "cartId")
+    private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(name = "customerId")
+    private Customer customer;
+
     private int quantity;
 }

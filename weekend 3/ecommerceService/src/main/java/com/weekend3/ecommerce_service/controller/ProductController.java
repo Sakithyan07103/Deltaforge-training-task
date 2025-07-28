@@ -2,7 +2,7 @@ package com.weekend3.ecommerce_service.controller;
 
 import com.weekend3.ecommerce_service.dto.ProductDTO;
 import com.weekend3.ecommerce_service.model.Product;
-import com.weekend3.ecommerce_service.service.ProductService;
+import com.weekend3.ecommerce_service.service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -11,12 +11,11 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
     @Autowired
-    ProductService productService;
+    ProductServiceImpl productService;
 
-    @PostMapping("/{productName}/{productPrice}/{stockQuantity}")
-    public Product addProduct(@PathVariable String productName,
-                              @PathVariable int productPrice, @PathVariable int stockQuantity) {
-        return productService.addProduct(productName, productPrice, stockQuantity);
+    @PostMapping("")
+    public Product addProduct(@RequestBody ProductDTO productDTO) {
+        return productService.addProduct(productDTO);
     }
 
     @GetMapping("")
