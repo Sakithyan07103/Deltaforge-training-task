@@ -1,8 +1,6 @@
-package com.day16.students_mark_portal.dto;
+package com.day17.Student_Marks_Portal.dto;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 public class SubjectsDTO {

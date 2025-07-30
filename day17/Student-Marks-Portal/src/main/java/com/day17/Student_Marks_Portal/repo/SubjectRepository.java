@@ -1,6 +1,6 @@
-package com.day16.students_mark_portal.repo;
+package com.day17.Student_Marks_Portal.repo;
 
-import com.day16.students_mark_portal.model.Subjects;
+import com.day17.Student_Marks_Portal.model.Subjects;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

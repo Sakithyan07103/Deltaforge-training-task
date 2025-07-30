@@ -1,12 +1,15 @@
-package com.day16.students_mark_portal.service.impls;
+package com.day17.Student_Marks_Portal.service.impls;
 
-import com.day16.students_mark_portal.dao.StudentDAO;
-import com.day16.students_mark_portal.dto.StudentsDTO;
-import com.day16.students_mark_portal.model.Students;
-import com.day16.students_mark_portal.service.serviceinterface.StudentService;
+
+import com.day17.Student_Marks_Portal.dao.StudentDAO;
+import com.day17.Student_Marks_Portal.dto.StudentsDTO;
+import com.day17.Student_Marks_Portal.model.Students;
+import com.day17.Student_Marks_Portal.service.serviceinterface.StudentService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,14 +45,16 @@ public class StudentServiceImpl implements StudentService {
 
         if (students.isPresent()) {
             Students std = students.get();
-            std.setStdId(studentsDTO.getStdId());
             std.setStdName(studentsDTO.getStdName());
-            std.setStdRoll(std.getStdRoll());
+            std.setStdRoll(studentsDTO.getStdRoll());
 
             return studentDAO.save(std);
         } else {
             return studentDAO.findById(studentsDTO.getStdId()).orElseThrow(() ->
-                    new EntityNotFoundException(studentsDTO.getStdId() + "is not found, can't be updated"));
+                    new ResponseStatusException(
+                            HttpStatus.NOT_FOUND,
+                            studentsDTO.getStdId() + " is not found, can't be updated"
+                    ));
         }
     }
 

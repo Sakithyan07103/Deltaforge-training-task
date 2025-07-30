@@ -1,7 +1,8 @@
-package com.day16.students_mark_portal.mapper;
+package com.day17.Student_Marks_Portal.mapper;
 
-import com.day16.students_mark_portal.dto.MarksDTO;
-import com.day16.students_mark_portal.model.Marks;
+
+import com.day17.Student_Marks_Portal.dto.MarksDTO;
+import com.day17.Student_Marks_Portal.model.Marks;
 import org.mapstruct.Mapper;
 
 import java.util.List;

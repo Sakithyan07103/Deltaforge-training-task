@@ -1,7 +1,7 @@
-package com.day16.students_mark_portal.dao;
+package com.day17.Student_Marks_Portal.dao;
 
-import com.day16.students_mark_portal.model.Marks;
-import com.day16.students_mark_portal.repo.MarkRepository;
+import com.day17.Student_Marks_Portal.model.Marks;
+import com.day17.Student_Marks_Portal.repo.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

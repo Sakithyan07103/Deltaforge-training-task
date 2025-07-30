@@ -1,15 +1,16 @@
-package com.day16.students_mark_portal.service.impls;
+package com.day17.Student_Marks_Portal.service.impls;
 
-import com.day16.students_mark_portal.dao.ExamDAO;
-import com.day16.students_mark_portal.dao.MarkDAO;
-import com.day16.students_mark_portal.dao.StudentDAO;
-import com.day16.students_mark_portal.dao.SubjectDAO;
-import com.day16.students_mark_portal.dto.MarksDTO;
-import com.day16.students_mark_portal.model.Exams;
-import com.day16.students_mark_portal.model.Marks;
-import com.day16.students_mark_portal.model.Students;
-import com.day16.students_mark_portal.model.Subjects;
-import com.day16.students_mark_portal.service.serviceinterface.MarkService;
+
+import com.day17.Student_Marks_Portal.dao.ExamDAO;
+import com.day17.Student_Marks_Portal.dao.MarkDAO;
+import com.day17.Student_Marks_Portal.dao.StudentDAO;
+import com.day17.Student_Marks_Portal.dao.SubjectDAO;
+import com.day17.Student_Marks_Portal.dto.MarksDTO;
+import com.day17.Student_Marks_Portal.model.Exams;
+import com.day17.Student_Marks_Portal.model.Marks;
+import com.day17.Student_Marks_Portal.model.Students;
+import com.day17.Student_Marks_Portal.model.Subjects;
+import com.day17.Student_Marks_Portal.service.serviceinterface.MarkService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

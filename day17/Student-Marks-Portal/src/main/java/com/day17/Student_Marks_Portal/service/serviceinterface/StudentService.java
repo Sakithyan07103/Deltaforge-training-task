@@ -1,7 +1,8 @@
-package com.day16.students_mark_portal.service.serviceinterface;
+package com.day17.Student_Marks_Portal.service.serviceinterface;
 
-import com.day16.students_mark_portal.dto.StudentsDTO;
-import com.day16.students_mark_portal.model.Students;
+
+import com.day17.Student_Marks_Portal.dto.StudentsDTO;
+import com.day17.Student_Marks_Portal.model.Students;
 
 import java.util.List;
 

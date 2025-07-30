@@ -1,8 +1,6 @@
-package com.day16.students_mark_portal.dto;
+package com.day17.Student_Marks_Portal.dto;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 public class StudentsDTO {
@@ -11,28 +9,4 @@ public class StudentsDTO {
     private String stdName;
 
     private int stdRoll;
-
-    public int getStdId() {
-        return stdId;
-    }
-
-    public void setStdId(int stdId) {
-        this.stdId = stdId;
-    }
-
-    public String getStdName() {
-        return stdName;
-    }
-
-    public void setStdName(String stdName) {
-        this.stdName = stdName;
-    }
-
-    public int getStdRoll() {
-        return stdRoll;
-    }
-
-    public void setStdRoll(int stdRoll) {
-        this.stdRoll = stdRoll;
-    }
 }

@@ -1,4 +1,4 @@
-package com.day16.students_mark_portal.model;
+package com.day17.Student_Marks_Portal.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
