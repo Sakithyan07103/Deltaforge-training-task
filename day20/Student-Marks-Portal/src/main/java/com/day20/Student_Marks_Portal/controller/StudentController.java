@@ -30,12 +30,12 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Students getStudentById(@PathVariable int id) {
         return studentService.getStudentById(id);
     }
 
-    @GetMapping("/{stdName}")
+    @GetMapping("/name/{stdName}")
     public Students getStudentByName(@PathVariable String stdName) {
         return studentService.getStudentByName(stdName);
     }
