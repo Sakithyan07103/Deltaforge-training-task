@@ -1,6 +1,5 @@
 package com.day17.Student_Marks_Portal.controller;
 
-
 import com.day17.Student_Marks_Portal.dto.MarksDTO;
 import com.day17.Student_Marks_Portal.model.Marks;
 import com.day17.Student_Marks_Portal.service.impls.MarkServiceImpl;
