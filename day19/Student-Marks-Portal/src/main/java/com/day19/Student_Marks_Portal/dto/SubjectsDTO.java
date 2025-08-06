@@ -1,26 +1,12 @@
 package com.day19.Student_Marks_Portal.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class SubjectsDTO {
+
+    @NotNull(message = "Subject id cannot be null")
     private int subId;
-
     private String subName;
-
-    public int getSubId() {
-        return subId;
-    }
-
-    public void setSubId(int subId) {
-        this.subId = subId;
-    }
-
-    public String getSubName() {
-        return subName;
-    }
-
-    public void setSubName(String subName) {
-        this.subName = subName;
-    }
 }

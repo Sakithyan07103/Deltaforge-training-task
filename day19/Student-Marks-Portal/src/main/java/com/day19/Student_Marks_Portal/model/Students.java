@@ -1,5 +1,6 @@
 package com.day19.Student_Marks_Portal.model;
 
+import com.day19.Student_Marks_Portal.validation.SchoolEmail;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,6 @@ public class Students {
     @Column(name = "student_name")
     private String stdName;
 
-    @Column(name = "student_roll_number")
-    private int stdRoll;
+    @Column(name = "student_Email")
+    private int stdEmail;
 }
