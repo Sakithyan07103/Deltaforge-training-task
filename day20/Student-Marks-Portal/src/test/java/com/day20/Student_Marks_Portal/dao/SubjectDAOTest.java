@@ -81,13 +81,13 @@ class SubjectDAOTest {
     @Test
     void test_FindById_Present() {
         Subjects subject = SubjectTestDataFactory.createDefaultSubject();
-        when(subjectRepository.findById(5)).thenReturn(Optional.of(subject));
+        when(subjectRepository.findById(1)).thenReturn(Optional.of(subject));
 
-        Optional<Subjects> result = subjectDAO.findById(5);
+        Optional<Subjects> result = subjectDAO.findById(1);
 
         assertTrue(result.isPresent());
-        assertEquals(5, result.get().getSubId());
-        verify(subjectRepository, times(1)).findById(5);
+        assertEquals(1, result.get().getSubId());
+        verify(subjectRepository, times(1)).findById(1);
     }
 
     @Test

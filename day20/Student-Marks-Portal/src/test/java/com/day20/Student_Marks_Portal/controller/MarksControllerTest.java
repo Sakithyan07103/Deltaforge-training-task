@@ -1,127 +1,93 @@
 package com.day20.Student_Marks_Portal.controller;
 
 import com.day20.Student_Marks_Portal.dto.MarksDTO;
-import com.day20.Student_Marks_Portal.model.Exams;
 import com.day20.Student_Marks_Portal.model.Marks;
-import com.day20.Student_Marks_Portal.model.Students;
-import com.day20.Student_Marks_Portal.model.Subjects;
 import com.day20.Student_Marks_Portal.service.impls.MarkServiceImpl;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.day20.Student_Marks_Portal.data_factory.MarksTestDataFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Arrays;
 import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-@WebMvcTest(MarksController.class)
 class MarksControllerTest {
 
     @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
     private MarkServiceImpl markService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
+    private MarksController marksController;
 
     private Marks marks;
     private MarksDTO marksDTO;
 
     @BeforeEach
     void setUp() {
-        Students student = new Students();
-        student.setStdId(3);
+        markService = mock(MarkServiceImpl.class);
+        marksController = new MarksController(markService);
 
-        Subjects subject = new Subjects();
-        subject.setSubId(2);
+        marks = MarksTestDataFactory.createDefaultMarks();
 
-        Exams exam = new Exams();
-        exam.setExamId(1);
-
-        marks = new Marks();
-        marks.setId(1);
-        marks.setStudents(student);
-        marks.setSubjects(subject);
-        marks.setExams(exam);
-        marks.setScore(75);
-
-        marksDTO = new MarksDTO();
-        marksDTO.setId(1);
-        marksDTO.setStudentId(3);
-        marksDTO.setSubjectId(2);
-        marksDTO.setExamsId(1);
-        marksDTO.setScore(75);
+        marksDTO = MarksDTO.builder()
+                .id(1)
+                .studentId(3)
+                .subjectId(2)
+                .examsId(1)
+                .score(75)
+                .build();
     }
 
     @Test
-    void Test_CreateMarks_Successfully() throws Exception {
-        Mockito.when(markService.createMarks(Mockito.any(MarksDTO.class))).thenReturn(marks);
+    void test_CreateMarks_Successfully() {
+        when(markService.createMarks(marksDTO)).thenReturn(marks);
 
-        mockMvc.perform(post("/mark")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(marksDTO)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.students.stdId").value(3))
-                .andExpect(jsonPath("$.subjects.subId").value(2))
-                .andExpect(jsonPath("$.exams.examId").value(1))
-                .andExpect(jsonPath("$.score").value(75.0));
+        Marks result = marksController.createMarks(marksDTO);
+
+        assertNotNull(result);
+        assertEquals(1, result.getId());
+        verify(markService, times(1)).createMarks(marksDTO);
     }
 
     @Test
-    void Test_GetAllMarks_Successfully() throws Exception {
-        List<Marks> marksList = Arrays.asList(marks);
+    void test_GetAllMarks_Successfully() {
+        List<Marks> mockList = List.of(marks);
+        when(markService.getAllMarks()).thenReturn(mockList);
 
-        Mockito.when(markService.getAllMarks()).thenReturn(marksList);
+        List<Marks> result = marksController.getAllMarks();
 
-        mockMvc.perform(get("/mark"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()").value(1))
-                .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].students.stdId").value(3));
+        assertEquals(1, result.size());
+        verify(markService, times(1)).getAllMarks();
     }
 
     @Test
-    void Test_GetMarksById_Successfully() throws Exception {
-        Mockito.when(markService.getMarksById(1)).thenReturn(marks);
+    void test_GetMarksById_Successfully() {
+        when(markService.getMarksById(1)).thenReturn(marks);
 
-        mockMvc.perform(get("/mark/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.students.stdId").value(3));
+        Marks result = marksController.getMarksById(1);
+
+        assertNotNull(result);
+        assertEquals(1, result.getId());
+        verify(markService, times(1)).getMarksById(1);
     }
 
     @Test
-    void Test_UpdateMarks_Successfully() throws Exception {
-        Mockito.when(markService.updateMarks(Mockito.any(MarksDTO.class))).thenReturn(marks);
+    void test_UpdateMarks_Successfully() {
+        when(markService.updateMarks(marksDTO)).thenReturn(marks);
 
-        mockMvc.perform(put("/mark")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(marksDTO)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.students.stdId").value(3))
-                .andExpect(jsonPath("$.subjects.subId").value(2))
-                .andExpect(jsonPath("$.exams.examId").value(1))
-                .andExpect(jsonPath("$.score").value(75.0));
+        Marks result = marksController.updateMarks(marksDTO);
+
+        assertNotNull(result);
+        assertEquals(1, result.getId());
+        verify(markService, times(1)).updateMarks(marksDTO);
     }
 
     @Test
-    void Test_DeleteMarks_Successfully() throws Exception {
-        Mockito.when(markService.deleteMarks(1)).thenReturn(true);
+    void test_DeleteMarks_Successfully() {
+        when(markService.deleteMarks(1)).thenReturn(true);
 
-        mockMvc.perform(delete("/mark/1"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("true"));
+        boolean result = marksController.deleteMarks(1);
+
+        assertTrue(result);
+        verify(markService, times(1)).deleteMarks(1);
     }
 }
+

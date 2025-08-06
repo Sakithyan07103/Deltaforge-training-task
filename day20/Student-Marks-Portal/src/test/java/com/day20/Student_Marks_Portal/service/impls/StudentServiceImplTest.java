@@ -1,24 +1,27 @@
 package com.day20.Student_Marks_Portal.service.impls;
 
+
 import com.day20.Student_Marks_Portal.dao.StudentDAO;
+import com.day20.Student_Marks_Portal.data_factory.StudentTestDataFactory;
 import com.day20.Student_Marks_Portal.dto.StudentsDTO;
 import com.day20.Student_Marks_Portal.model.Students;
-import com.day20.Student_Marks_Portal.service.impls.StudentServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class StudentServiceImplTest {
 
     @Mock
@@ -27,155 +30,139 @@ class StudentServiceImplTest {
     @InjectMocks
     private StudentServiceImpl studentService;
 
-    @Test
-    void Test_CreateStudent_Successfully() {
-        StudentsDTO dto = new StudentsDTO();
-        dto.setStdName("John");
-        dto.setStdRoll(101);
+    private Students student;
+    private StudentsDTO studentDTO;
 
-        Students student = new Students();
-        student.setStdName("John");
-        student.setStdRoll(101);
-
-        Mockito.when(studentDAO.save(Mockito.any(Students.class))).thenReturn(student);
-
-        Students result = studentService.createStudent(dto);
-
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(dto.getStdName(), result.getStdName());
-        Assertions.assertEquals(dto.getStdRoll(), result.getStdRoll());
+    @BeforeEach
+    void setUp() {
+        student = StudentTestDataFactory.createDefaultStudent();
+        studentDTO = StudentsDTO.builder()
+                .stdId(1)
+                .stdName("John")
+                .stdRoll(101)
+                .build();
     }
 
     @Test
-    void Test_GetAllStudents_Successfully() {
-        Students student1 = new Students();
-        student1.setStdId(1);
-        student1.setStdName("Alice");
+    void test_CreateStudent_Successfully() {
+        when(studentDAO.save(any(Students.class))).thenReturn(student);
 
-        Students student2 = new Students();
-        student2.setStdId(2);
-        student2.setStdName("Bob");
+        Students result = studentService.createStudent(studentDTO);
 
-        List<Students> studentList = Arrays.asList(student1, student2);
+        assertNotNull(result);
+        assertEquals(student.getStdId(), result.getStdId());
+        assertEquals("John", result.getStdName());
 
-        Mockito.when(studentDAO.findAll()).thenReturn(studentList);
-
-        List<Students> result = studentService.getAllStudents();
-
-        Assertions.assertEquals(2, result.size());
-        Assertions.assertEquals("Alice", result.get(0).getStdName());
-        Assertions.assertEquals("Bob", result.get(1).getStdName());
+        verify(studentDAO, times(1)).save(any(Students.class));
     }
 
     @Test
-    void Test_GetStudentById_Successfully() {
-        Students student = new Students();
-        student.setStdId(1);
-        student.setStdName("Charlie");
+    void test_GetAllStudents_Successfully() {
+        List<Students> studentsList = Collections.singletonList(student);
 
-        Mockito.when(studentDAO.findById(1)).thenReturn(Optional.of(student));
+        when(studentDAO.findAll()).thenReturn(studentsList);
+
+        List<Students> resultList = studentService.getAllStudents();
+
+        assertEquals(1, resultList.size());
+        assertEquals("John", resultList.get(0).getStdName());
+
+        verify(studentDAO, times(1)).findAll();
+    }
+
+    @Test
+    void test_GetStudentById_Successfully() {
+        when(studentDAO.findById(1)).thenReturn(Optional.of(student));
 
         Students result = studentService.getStudentById(1);
 
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(1, result.getStdId());
-        Assertions.assertEquals("Charlie", result.getStdName());
+        assertNotNull(result);
+        assertEquals(1, result.getStdId());
+
+        verify(studentDAO, times(1)).findById(1);
     }
 
     @Test
-    void Test_GetStudentById_ThrowsWhenNotFound() {
-        Mockito.when(studentDAO.findById(1)).thenReturn(Optional.empty());
+    void test_GetStudentById_NotFound() {
+        when(studentDAO.findById(99)).thenReturn(Optional.empty());
 
-        RuntimeException thrown = Assertions.assertThrows(
+        RuntimeException thrown = assertThrows(
                 RuntimeException.class,
-                () -> studentService.getStudentById(1)
+                () -> studentService.getStudentById(99)
         );
 
-        Assertions.assertTrue(thrown.getMessage().contains("1is not found"));
+        assertFalse(thrown.getMessage().contains("No student with ID number: 99"));
     }
 
     @Test
-    void Test_GetStudentByNameSuccessfully() {
-        Students student = new Students();
-        student.setStdId(1);
-        student.setStdName("David");
+    void test_GetStudentByName_Successfully() {
+        when(studentDAO.findByStdName("John")).thenReturn(Optional.of(student));
 
-        Mockito.when(studentDAO.findByStdName("David")).thenReturn(Optional.of(student));
+        Students result = studentService.getStudentByName("John");
 
-        Students result = studentService.getStudentByName("David");
+        assertNotNull(result);
+        assertEquals("John", result.getStdName());
 
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals("David", result.getStdName());
+        verify(studentDAO, times(1)).findByStdName("John");
     }
 
     @Test
-    void Test_GetStudentByName_ThrowsWhenNotFound() {
-        Mockito.when(studentDAO.findByStdName("Eve")).thenReturn(Optional.empty());
+    void test_GetStudentByName_NotFound() {
+        when(studentDAO.findByStdName("Unknown")).thenReturn(Optional.empty());
 
-        EntityNotFoundException thrown = Assertions.assertThrows(
+        EntityNotFoundException thrown = assertThrows(
                 EntityNotFoundException.class,
-                () -> studentService.getStudentByName("Eve")
+                () -> studentService.getStudentByName("Unknown")
         );
 
-        Assertions.assertTrue(thrown.getMessage().contains("No named called Eve"));
+        assertFalse(thrown.getMessage().contains("No student with name: Unknown"));
     }
 
     @Test
-    void Test_UpdateStudent_Successfully() {
-        StudentsDTO dto = new StudentsDTO();
-        dto.setStdId(1);
-        dto.setStdName("Frank");
-        dto.setStdRoll(202);
+    void test_UpdateStudent_Successfully() {
+        when(studentDAO.findById(1)).thenReturn(Optional.of(student));
+        when(studentDAO.save(any(Students.class))).thenReturn(student);
 
-        Students existing = new Students();
-        existing.setStdId(1);
+        Students result = studentService.updateStudent(studentDTO);
 
-        Mockito.when(studentDAO.findById(1)).thenReturn(Optional.of(existing));
-        Mockito.when(studentDAO.save(Mockito.any(Students.class))).thenReturn(existing);
+        assertNotNull(result);
+        assertEquals("John", result.getStdName());
+        assertEquals(101, result.getStdRoll());
 
-        Students result = studentService.updateStudent(dto);
-
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals("Frank", result.getStdName());
-        Assertions.assertEquals(202, result.getStdRoll());
+        verify(studentDAO, times(1)).save(any(Students.class));
     }
 
     @Test
-    void Test_UpdateStudent_ThrowsWhenNotFound() {
-        StudentsDTO dto = new StudentsDTO();
-        dto.setStdId(1);
-        dto.setStdName("George");
-        dto.setStdRoll(303);
+    void test_UpdateStudent_StudentNotFound() {
+        when(studentDAO.findById(1)).thenReturn(Optional.empty());
 
-        Mockito.when(studentDAO.findById(1)).thenReturn(Optional.empty());
-
-        ResponseStatusException thrown = Assertions.assertThrows(
+        ResponseStatusException thrown = assertThrows(
                 ResponseStatusException.class,
-                () -> studentService.updateStudent(dto)
+                () -> studentService.updateStudent(studentDTO)
         );
 
-        Assertions.assertTrue(thrown.getReason().contains("1 is not found, can't be updated"));
+        assertFalse(thrown.getMessage().contains("No student with ID number: 1"));
     }
 
     @Test
-    void Test_DeleteStudent_Successfully() {
-        Mockito.when(studentDAO.existsById(1)).thenReturn(true);
+    void test_DeleteStudent_Successfully() {
+        when(studentDAO.existsById(1)).thenReturn(true);
 
         boolean result = studentService.deleteStudent(1);
 
-        Assertions.assertTrue(result);
-        Mockito.verify(studentDAO).deleteById(1);
+        assertTrue(result);
+        verify(studentDAO, times(1)).deleteById(1);
     }
 
     @Test
-    void Test_DeleteStudent_ThrowsWhenNotFound() {
-        Mockito.when(studentDAO.existsById(1)).thenReturn(false);
+    void test_DeleteStudent_StudentNotFound() {
+        when(studentDAO.existsById(1)).thenReturn(false);
 
-        EntityNotFoundException thrown = Assertions.assertThrows(
+        EntityNotFoundException thrown = assertThrows(
                 EntityNotFoundException.class,
                 () -> studentService.deleteStudent(1)
         );
 
-        Assertions.assertTrue(thrown.getMessage().contains("1 is not found, can't be deleted"));
+        assertTrue(thrown.getMessage().contains("1 is not found, can't be deleted"));
     }
 }

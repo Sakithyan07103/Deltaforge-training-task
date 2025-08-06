@@ -35,14 +35,29 @@ class StudentDAOTest {
     }
 
     @Test
+    void test_Constructor() {
+        StudentDAO dao = new StudentDAO();
+        Assertions.assertNotNull(dao);
+    }
+
+    @Test
     void test_Save() {
         Students students = StudentTestDataFactory.createDefaultStudent();
         when(studentRepository.save(any(Students.class))).thenReturn(students);
 
         Students resultStudents = studentDAO.save(students);
 
-        Assertions.assertNotNull(students);
+        Assertions.assertNotNull(resultStudents);
         Assertions.assertEquals(1, resultStudents.getStdId());
+        verify(studentRepository, times(1)).save(students);
+    }
+
+    @Test
+    void test_Save_NullInput() {
+        when(studentRepository.save(null)).thenThrow(new IllegalArgumentException("Student cannot be null"));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> studentDAO.save(null));
+        verify(studentRepository, times(1)).save(null);
     }
 
     @Test
@@ -57,6 +72,7 @@ class StudentDAOTest {
         verify(studentRepository, times(1)).findAll();
     }
 
+    @Test
     void test_ExistById() {
         when(studentRepository.existsById(1)).thenReturn(true);
 
@@ -94,6 +110,15 @@ class StudentDAOTest {
 
         studentDAO.deleteById(1);
 
+        verify(studentRepository, times(1)).deleteById(1);
+    }
+
+    @Test
+    void test_DeleteById_Exception() {
+        doThrow(new RuntimeException("Delete failed")).when(studentRepository).deleteById(1);
+
+        RuntimeException ex = Assertions.assertThrows(RuntimeException.class, () -> studentDAO.deleteById(1));
+        Assertions.assertEquals("Delete failed", ex.getMessage());
         verify(studentRepository, times(1)).deleteById(1);
     }
 }

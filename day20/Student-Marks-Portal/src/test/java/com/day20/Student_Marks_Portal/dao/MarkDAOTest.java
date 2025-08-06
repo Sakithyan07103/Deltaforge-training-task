@@ -89,6 +89,7 @@ class MarkDAOTest {
         verify(markRepository, times(1)).findById(1);
     }
 
+    @Test
     void test_DeleteById() {
         doNothing().when(markRepository).deleteById(1);
 

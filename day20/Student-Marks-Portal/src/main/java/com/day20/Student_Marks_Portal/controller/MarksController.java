@@ -11,6 +11,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/mark")
 public class MarksController {
+
+    public MarksController(MarkServiceImpl markService) {
+        this.markService = markService;
+    }
+
     @Autowired
     MarkServiceImpl markService;
 
@@ -35,7 +40,7 @@ public class MarksController {
     }
 
     @DeleteMapping("/{id}")
-    public boolean deleteStudent(@PathVariable int id) {
+    public boolean deleteMarks(@PathVariable int id) {
         return markService.deleteMarks(id);
     }
 }

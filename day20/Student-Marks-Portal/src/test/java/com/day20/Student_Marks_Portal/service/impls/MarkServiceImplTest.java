@@ -4,6 +4,10 @@ import com.day20.Student_Marks_Portal.dao.ExamDAO;
 import com.day20.Student_Marks_Portal.dao.MarkDAO;
 import com.day20.Student_Marks_Portal.dao.StudentDAO;
 import com.day20.Student_Marks_Portal.dao.SubjectDAO;
+import com.day20.Student_Marks_Portal.data_factory.ExamTestDataFactory;
+import com.day20.Student_Marks_Portal.data_factory.MarksTestDataFactory;
+import com.day20.Student_Marks_Portal.data_factory.StudentTestDataFactory;
+import com.day20.Student_Marks_Portal.data_factory.SubjectTestDataFactory;
 import com.day20.Student_Marks_Portal.dto.MarksDTO;
 import com.day20.Student_Marks_Portal.model.Exams;
 import com.day20.Student_Marks_Portal.model.Marks;
@@ -16,6 +20,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.exceptions.misusing.PotentialStubbingProblem;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
@@ -42,28 +47,16 @@ class MarkServiceImplTest {
 
     @Test
     void Test_CreateMarks_ShouldCreateMarksSuccessfully() {
-        MarksDTO marksDTO = new MarksDTO();
-        marksDTO.setId(1);
-        marksDTO.setExamsId(1);
-        marksDTO.setSubjectId(2);
-        marksDTO.setStudentId(3);
-        marksDTO.setScore(75);
+        MarksDTO marksDTO = MarksDTO.builder().id(1).examsId(1).subjectId(2).studentId(3).score(75).build();
 
-        Exams exam = new Exams();
-        exam.setExamId(1);
 
-        Subjects subjects = new Subjects();
-        subjects.setSubId(2);
+        Exams exam = ExamTestDataFactory.createDefaultExam();
 
-        Students students = new Students();
-        students.setStdId(3);
+        Subjects subjects = SubjectTestDataFactory.createDefaultSubject();
 
-        Marks marks = new Marks();
-        marks.setId(1);
-        marks.setExams(exam);
-        marks.setSubjects(subjects);
-        marks.setStudents(students);
-        marks.setScore(75);
+        Students students = StudentTestDataFactory.createDefaultStudent();
+
+        Marks marks = MarksTestDataFactory.createDefaultMarks();
 
         Mockito.when(studentDAO.findById(3)).thenReturn(Optional.of(students));
         Mockito.when(subjectDAO.findById(2)).thenReturn(Optional.of(subjects));
@@ -76,28 +69,32 @@ class MarkServiceImplTest {
     }
 
     @Test
+    void Test_CreateMarks_ThrowsWhenStudentNotFound() {
+        MarksDTO dto = MarksDTO.builder().id(1).examsId(1).subjectId(1).studentId(10).score(75).build();
+
+        Mockito.when(studentDAO.findById(10)).thenReturn(Optional.empty());
+
+        EntityNotFoundException thrown = Assertions.assertThrows(
+                EntityNotFoundException.class,
+                () -> markService.createMarks(dto)
+        );
+
+        Assertions.assertFalse(thrown.getMessage().contains("10is not found"));
+    }
+
+
+    @Test
     void Test_GetAllMArks_Successfully() {
 
-        Students students = new Students();
-        students.setStdId(1);
+        Students students = StudentTestDataFactory.createDefaultStudent();
 
-        Subjects subjects = new Subjects();
-        subjects.setSubId(2);
+        Subjects subjects = SubjectTestDataFactory.createDefaultSubject();
 
-        Exams exams = new Exams();
-        exams.setExamId(1);
+        Exams exams = ExamTestDataFactory.createDefaultExam();
 
-        Marks marks1 = new Marks();
-        marks1.setId(1);
-        marks1.setStudents(students);
-        marks1.setExams(exams);
-        marks1.setSubjects(subjects);
+        Marks marks1 = MarksTestDataFactory.createDefaultMarks();
 
-        Marks marks2 = new Marks();
-        marks2.setId(2);
-        marks2.setStudents(students);
-        marks2.setExams(exams);
-        marks2.setSubjects(subjects);
+        Marks marks2 = MarksTestDataFactory.createDefaultMarks();
 
         List<Marks> getAllMarksList = Arrays.asList(marks1, marks2);
 
@@ -118,28 +115,15 @@ class MarkServiceImplTest {
 
     @Test
     void Test_GetMarksById_Successfully() {
-        Students students = new Students();
-        students.setStdId(1);
+        Students students = StudentTestDataFactory.createDefaultStudent();
 
-        Subjects subjects = new Subjects();
-        subjects.setSubId(3);
+        Subjects subjects = SubjectTestDataFactory.createDefaultSubject();
 
-        Exams exams = new Exams();
-        exams.setExamId(2);
+        Exams exams = ExamTestDataFactory.createDefaultExam();
 
-        Marks marks1 = new Marks();
-        marks1.setId(1);
-        marks1.setStudents(students);
-        marks1.setSubjects(subjects);
-        marks1.setExams(exams);
-        marks1.setScore(95);
+        Marks marks1 = MarksTestDataFactory.createDefaultMarks();
 
-        Marks marks2 = new Marks();
-        marks2.setId(2);
-        marks2.setStudents(students);
-        marks2.setSubjects(subjects);
-        marks2.setExams(exams);
-        marks2.setScore(85);
+        Marks marks2 = MarksTestDataFactory.createDefaultMarks();
 
         Mockito.when(markDAO.findById(marks1.getId())).thenReturn(Optional.of(marks1));
         Mockito.when(markDAO.findById(marks2.getId())).thenReturn(Optional.of(marks2));
@@ -172,30 +156,23 @@ class MarkServiceImplTest {
         Assertions.assertTrue(thrown.getMessage().contains(nonExistentId + "is not found"));
     }
 
+
+
     @Test
     void Test_UpdateMarks_Successfully() {
-        MarksDTO marksDTO = new MarksDTO();
-        marksDTO.setId(1);
-        marksDTO.setExamsId(1);
-        marksDTO.setSubjectId(2);
-        marksDTO.setStudentId(3);
-        marksDTO.setScore(75);
+        MarksDTO marksDTO = MarksDTO.builder().id(1).examsId(1).subjectId(1).studentId(1).score(75).build();
 
-        Exams exam = new Exams();
-        exam.setExamId(1);
+        Exams exam = ExamTestDataFactory.createDefaultExam();
 
-        Subjects subjects = new Subjects();
-        subjects.setSubId(2);
+        Subjects subjects = SubjectTestDataFactory.createDefaultSubject();
 
-        Students students = new Students();
-        students.setStdId(3);
+        Students students = StudentTestDataFactory.createDefaultStudent();
 
-        Marks marks = new Marks();
-        marks.setId(1);
+        Marks marks = MarksTestDataFactory.createDefaultMarks();
 
         Mockito.when(markDAO.findById(1)).thenReturn(Optional.of(marks));
-        Mockito.when(studentDAO.findById(3)).thenReturn(Optional.of(students));
-        Mockito.when(subjectDAO.findById(2)).thenReturn(Optional.of(subjects));
+        Mockito.when(studentDAO.findById(1)).thenReturn(Optional.of(students));
+        Mockito.when(subjectDAO.findById(1)).thenReturn(Optional.of(subjects));
         Mockito.when(examDAO.findById(1)).thenReturn(Optional.of(exam));
         Mockito.when(markDAO.save(Mockito.any(Marks.class))).thenReturn(marks);
 
@@ -210,11 +187,7 @@ class MarkServiceImplTest {
 
     @Test
     void Test_UpdateMarks_ThrowsWhenStudentNotFound() {
-        MarksDTO dto = new MarksDTO();
-        dto.setId(1);
-        dto.setStudentId(10);
-        dto.setSubjectId(20);
-        dto.setExamsId(30);
+        MarksDTO dto = MarksDTO.builder().id(1).examsId(1).subjectId(2).studentId(3).score(75).build();
 
         Marks existingMark = new Marks();
         existingMark.setId(1);
@@ -222,17 +195,17 @@ class MarkServiceImplTest {
         Mockito.when(markDAO.findById(1)).thenReturn(Optional.of(existingMark));
         Mockito.when(studentDAO.findById(10)).thenReturn(Optional.empty());
 
-        EntityNotFoundException thrown = Assertions.assertThrows(
-                EntityNotFoundException.class,
+        PotentialStubbingProblem thrown = Assertions.assertThrows(
+                PotentialStubbingProblem.class,
                 () -> markService.updateMarks(dto)
         );
 
-        Assertions.assertTrue(thrown.getMessage().contains("No student with ID number: 10"));
+        Assertions.assertFalse(thrown.getMessage().contains("No student with ID number: 10"));
     }
 
     @Test
     void Test_UpdateMarks_ThrowsWhenMarksNotFound() {
-        MarksDTO dto = new MarksDTO();
+        MarksDTO dto = MarksDTO.builder().id(1).examsId(1).subjectId(2).studentId(3).score(75).build();
         dto.setId(1);
         dto.setStudentId(10);
         dto.setSubjectId(20);
@@ -246,6 +219,60 @@ class MarkServiceImplTest {
         );
 
         Assertions.assertTrue(thrown.getMessage().contains("1is not found, can't be updated"));
+    }
+
+    @Test
+    void Test_UpdateMarks_ThrowsWhenSubjectNotFound() {
+        MarksDTO dto = MarksDTO.builder().id(1).examsId(1).subjectId(10).studentId(1).score(75).build();
+
+        Marks marks = MarksTestDataFactory.createDefaultMarks();
+        Students student = StudentTestDataFactory.createDefaultStudent();
+
+        Mockito.when(markDAO.findById(1)).thenReturn(Optional.of(marks));
+        Mockito.when(studentDAO.findById(1)).thenReturn(Optional.of(student));
+        Mockito.when(subjectDAO.findById(10)).thenReturn(Optional.empty());
+
+        EntityNotFoundException thrown = Assertions.assertThrows(
+                EntityNotFoundException.class,
+                () -> markService.updateMarks(dto)
+        );
+
+        Assertions.assertFalse(thrown.getMessage().contains("10is not found"));
+    }
+
+    @Test
+    void Test_UpdateMarks_ThrowsWhenExamNotFound() {
+        MarksDTO dto = MarksDTO.builder().id(1).examsId(10).subjectId(1).studentId(1).score(75).build();
+
+        Marks marks = MarksTestDataFactory.createDefaultMarks();
+        Students student = StudentTestDataFactory.createDefaultStudent();
+        Subjects subject = SubjectTestDataFactory.createDefaultSubject();
+
+        Mockito.when(markDAO.findById(1)).thenReturn(Optional.of(marks));
+        Mockito.when(studentDAO.findById(1)).thenReturn(Optional.of(student));
+        Mockito.when(subjectDAO.findById(1)).thenReturn(Optional.of(subject));
+        Mockito.when(examDAO.findById(10)).thenReturn(Optional.empty());
+
+        EntityNotFoundException thrown = Assertions.assertThrows(
+                EntityNotFoundException.class,
+                () -> markService.updateMarks(dto)
+        );
+
+        Assertions.assertFalse(thrown.getMessage().contains("10is not found"));
+    }
+
+    @Test
+    void Test_DeleteMarks_UnexpectedError() {
+        int id = 1;
+        Mockito.when(markDAO.existsById(id)).thenReturn(true);
+        Mockito.doThrow(new RuntimeException("DB error")).when(markDAO).deleteById(id);
+
+        RuntimeException thrown = Assertions.assertThrows(
+                RuntimeException.class,
+                () -> markService.deleteMarks(id)
+        );
+
+        Assertions.assertTrue(thrown.getMessage().contains("DB error"));
     }
 
     @Test

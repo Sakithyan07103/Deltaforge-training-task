@@ -1,116 +1,107 @@
 package com.day20.Student_Marks_Portal.controller;
 
+import com.day20.Student_Marks_Portal.data_factory.StudentTestDataFactory;
 import com.day20.Student_Marks_Portal.dto.StudentsDTO;
 import com.day20.Student_Marks_Portal.model.Students;
 import com.day20.Student_Marks_Portal.service.impls.StudentServiceImpl;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@WebMvcTest(StudentController.class)
 class StudentControllerTest {
 
     @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
+    private StudentController studentController;
     private StudentServiceImpl studentService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     private Students student;
     private StudentsDTO studentDTO;
 
     @BeforeEach
     void setUp() {
-        student = new Students();
-        student.setStdId(1);
-        student.setStdName("John");
-        student.setStdRoll(101);
+        studentService = mock(StudentServiceImpl.class);
+        studentController = new StudentController(studentService);
 
-        studentDTO = new StudentsDTO();
-        studentDTO.setStdId(1);
-        studentDTO.setStdName("John");
-        studentDTO.setStdRoll(101);
+        student = StudentTestDataFactory.createDefaultStudent();
+        studentDTO = StudentsDTO.builder().stdId(1).stdName("john").stdRoll(101).build();
     }
 
     @Test
-    void Test_CreateStudentSuccessfully() throws Exception {
-        Mockito.when(studentService.createStudent(Mockito.any(StudentsDTO.class))).thenReturn(student);
+    void test_CreateStudentSuccessfully() {
+        when(studentService.createStudent(any(StudentsDTO.class))).thenReturn(student);
 
-        mockMvc.perform(post("/std")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(studentDTO)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.stdId").value(1))
-                .andExpect(jsonPath("$.stdName").value("John"))
-                .andExpect(jsonPath("$.stdRoll").value(101));
+        Students result = studentController.createStudent(studentDTO);
+
+        assertNotNull(result);
+        assertEquals(1, result.getStdId());
+        assertEquals("John", result.getStdName());
+        assertEquals(101, result.getStdRoll());
+
+        verify(studentService, times(1)).createStudent(studentDTO);
     }
 
     @Test
-    void Test_GetAllStudentsSuccessfully() throws Exception {
-        List<Students> studentList = Arrays.asList(student);
+    void test_GetAllStudentsSuccessfully() {
+        when(studentService.getAllStudents()).thenReturn(List.of(student));
 
-        Mockito.when(studentService.getAllStudents()).thenReturn(studentList);
+        List<Students> resultList = studentController.getAllStudents();
 
-        mockMvc.perform(get("/std"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()").value(1))
-                .andExpect(jsonPath("$[0].stdName").value("John"));
+        assertEquals(1, resultList.size());
+        assertEquals("John", resultList.get(0).getStdName());
+
+        verify(studentService, times(1)).getAllStudents();
     }
 
     @Test
-    void Test_GetStudentByIdSuccessfully() throws Exception {
-        Mockito.when(studentService.getStudentById(1)).thenReturn(student);
+    void test_GetStudentByIdSuccessfully() {
+        when(studentService.getStudentById(1)).thenReturn(student);
 
-        mockMvc.perform(get("/std/id/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.stdId").value(1))
-                .andExpect(jsonPath("$.stdName").value("John"));
+        Students result = studentController.getStudentById(1);
+
+        assertNotNull(result);
+        assertEquals(1, result.getStdId());
+        assertEquals("John", result.getStdName());
+
+        verify(studentService, times(1)).getStudentById(1);
     }
 
     @Test
-    void Test_GetStudentByNameSuccessfully() throws Exception {
-        Mockito.when(studentService.getStudentByName("John")).thenReturn(student);
+    void test_GetStudentByNameSuccessfully() {
+        when(studentService.getStudentByName("John")).thenReturn(student);
 
-        mockMvc.perform(get("/std/name/John"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.stdName").value("John"))
-                .andExpect(jsonPath("$.stdRoll").value(101));
+        Students result = studentController.getStudentByName("John");
+
+        assertNotNull(result);
+        assertEquals("John", result.getStdName());
+
+        verify(studentService, times(1)).getStudentByName("John");
     }
 
     @Test
-    void Test_UpdateStudentSuccessfully() throws Exception {
-        Mockito.when(studentService.updateStudent(Mockito.any(StudentsDTO.class))).thenReturn(student);
+    void test_UpdateStudentSuccessfully() {
+        when(studentService.updateStudent(any(StudentsDTO.class))).thenReturn(student);
 
-        mockMvc.perform(put("/std")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(studentDTO)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.stdId").value(1))
-                .andExpect(jsonPath("$.stdName").value("John"))
-                .andExpect(jsonPath("$.stdRoll").value(101));
+        Students result = studentController.updateStudent(studentDTO);
+
+        assertNotNull(result);
+        assertEquals(1, result.getStdId());
+        assertEquals("John", result.getStdName());
+
+        verify(studentService, times(1)).updateStudent(studentDTO);
     }
 
     @Test
-    void Test_DeleteStudentSuccessfully() throws Exception {
-        Mockito.when(studentService.deleteStudent(1)).thenReturn(true);
+    void test_DeleteStudentSuccessfully() {
+        when(studentService.deleteStudent(1)).thenReturn(true);
 
-        mockMvc.perform(delete("/std/1"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("true"));
+        boolean deleted = studentController.deleteStudent(1);
+
+        assertTrue(deleted);
+        verify(studentService, times(1)).deleteStudent(1);
     }
 }

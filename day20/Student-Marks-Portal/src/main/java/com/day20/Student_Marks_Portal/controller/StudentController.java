@@ -13,6 +13,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/std")
 public class StudentController {
+
+    public StudentController(StudentServiceImpl studentService) {
+        this.studentService = studentService;
+    }
+
     @Autowired
     StudentServiceImpl studentService;
 

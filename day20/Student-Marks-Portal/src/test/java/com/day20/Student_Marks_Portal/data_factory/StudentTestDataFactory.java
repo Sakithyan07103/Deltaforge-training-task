@@ -13,6 +13,6 @@ public class StudentTestDataFactory {
     }
 
     public static Students createDefaultStudent() {
-        return createStudent(1, "John Doe", 101);
+        return createStudent(1, "John", 101);
     }
 }
