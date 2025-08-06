@@ -64,7 +64,7 @@ class MarksControllerTest {
     }
 
     @Test
-    void createMarksSuccessfully() throws Exception {
+    void Test_CreateMarks_Successfully() throws Exception {
         Mockito.when(markService.createMarks(Mockito.any(MarksDTO.class))).thenReturn(marks);
 
         mockMvc.perform(post("/mark")
@@ -79,7 +79,7 @@ class MarksControllerTest {
     }
 
     @Test
-    void getAllMarksSuccessfully() throws Exception {
+    void Test_GetAllMarks_Successfully() throws Exception {
         List<Marks> marksList = Arrays.asList(marks);
 
         Mockito.when(markService.getAllMarks()).thenReturn(marksList);
@@ -92,7 +92,7 @@ class MarksControllerTest {
     }
 
     @Test
-    void getMarksByIdSuccessfully() throws Exception {
+    void Test_GetMarksById_Successfully() throws Exception {
         Mockito.when(markService.getMarksById(1)).thenReturn(marks);
 
         mockMvc.perform(get("/mark/1"))
@@ -102,7 +102,7 @@ class MarksControllerTest {
     }
 
     @Test
-    void updateMarksSuccessfully() throws Exception {
+    void Test_UpdateMarks_Successfully() throws Exception {
         Mockito.when(markService.updateMarks(Mockito.any(MarksDTO.class))).thenReturn(marks);
 
         mockMvc.perform(put("/mark")
@@ -117,7 +117,7 @@ class MarksControllerTest {
     }
 
     @Test
-    void deleteMarksSuccessfully() throws Exception {
+    void Test_DeleteMarks_Successfully() throws Exception {
         Mockito.when(markService.deleteMarks(1)).thenReturn(true);
 
         mockMvc.perform(delete("/mark/1"))

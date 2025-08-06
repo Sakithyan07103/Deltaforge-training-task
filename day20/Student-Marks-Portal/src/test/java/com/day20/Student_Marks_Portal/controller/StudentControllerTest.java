@@ -6,13 +6,11 @@ import com.day20.Student_Marks_Portal.service.impls.StudentServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
@@ -50,7 +48,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void createStudentSuccessfully() throws Exception {
+    void Test_CreateStudentSuccessfully() throws Exception {
         Mockito.when(studentService.createStudent(Mockito.any(StudentsDTO.class))).thenReturn(student);
 
         mockMvc.perform(post("/std")
@@ -63,7 +61,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void getAllStudentsSuccessfully() throws Exception {
+    void Test_GetAllStudentsSuccessfully() throws Exception {
         List<Students> studentList = Arrays.asList(student);
 
         Mockito.when(studentService.getAllStudents()).thenReturn(studentList);
@@ -75,7 +73,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void getStudentByIdSuccessfully() throws Exception {
+    void Test_GetStudentByIdSuccessfully() throws Exception {
         Mockito.when(studentService.getStudentById(1)).thenReturn(student);
 
         mockMvc.perform(get("/std/id/1"))
@@ -85,7 +83,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void getStudentByNameSuccessfully() throws Exception {
+    void Test_GetStudentByNameSuccessfully() throws Exception {
         Mockito.when(studentService.getStudentByName("John")).thenReturn(student);
 
         mockMvc.perform(get("/std/name/John"))
@@ -95,7 +93,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void updateStudentSuccessfully() throws Exception {
+    void Test_UpdateStudentSuccessfully() throws Exception {
         Mockito.when(studentService.updateStudent(Mockito.any(StudentsDTO.class))).thenReturn(student);
 
         mockMvc.perform(put("/std")
@@ -108,7 +106,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void deleteStudentSuccessfully() throws Exception {
+    void Test_DeleteStudentSuccessfully() throws Exception {
         Mockito.when(studentService.deleteStudent(1)).thenReturn(true);
 
         mockMvc.perform(delete("/std/1"))

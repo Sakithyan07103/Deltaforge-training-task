@@ -41,7 +41,7 @@ class MarkServiceImplTest {
     MarkServiceImpl markService;
 
     @Test
-    void createMarksShouldCreateMarksSuccessfully() {
+    void Test_CreateMarks_ShouldCreateMarksSuccessfully() {
         MarksDTO marksDTO = new MarksDTO();
         marksDTO.setId(1);
         marksDTO.setExamsId(1);
@@ -76,7 +76,7 @@ class MarkServiceImplTest {
     }
 
     @Test
-    void getAllMArksSuccessfully() {
+    void Test_GetAllMArks_Successfully() {
 
         Students students = new Students();
         students.setStdId(1);
@@ -117,7 +117,7 @@ class MarkServiceImplTest {
     }
 
     @Test
-    void getMarksByIdSuccessfully() {
+    void Test_GetMarksById_Successfully() {
         Students students = new Students();
         students.setStdId(1);
 
@@ -158,7 +158,7 @@ class MarkServiceImplTest {
     }
 
     @Test
-    void getMarksByIdNotFound() {
+    void Test_GetMarksById_NotFound() {
         int nonExistentId = 99;
 
         Mockito.when(markDAO.findById(nonExistentId)).thenReturn(Optional.empty());
@@ -172,9 +172,8 @@ class MarkServiceImplTest {
         Assertions.assertTrue(thrown.getMessage().contains(nonExistentId + "is not found"));
     }
 
-
     @Test
-    void updateMarksSuccessfully() {
+    void Test_UpdateMarks_Successfully() {
         MarksDTO marksDTO = new MarksDTO();
         marksDTO.setId(1);
         marksDTO.setExamsId(1);
@@ -210,7 +209,7 @@ class MarkServiceImplTest {
     }
 
     @Test
-    void updateMarksThrowsWhenStudentNotFound() {
+    void Test_UpdateMarks_ThrowsWhenStudentNotFound() {
         MarksDTO dto = new MarksDTO();
         dto.setId(1);
         dto.setStudentId(10);
@@ -232,7 +231,7 @@ class MarkServiceImplTest {
     }
 
     @Test
-    void updateMarksThrowsWhenMarksNotFound() {
+    void Test_UpdateMarks_ThrowsWhenMarksNotFound() {
         MarksDTO dto = new MarksDTO();
         dto.setId(1);
         dto.setStudentId(10);
@@ -250,7 +249,7 @@ class MarkServiceImplTest {
     }
 
     @Test
-    void deleteMarksSuccessfully() {
+    void Test_DeleteMarks_Successfully() {
         int id = 1;
 
         Mockito.when(markDAO.existsById(id)).thenReturn(true);
@@ -262,7 +261,7 @@ class MarkServiceImplTest {
     }
 
     @Test
-    void deleteMarksThrowsWhenNotFound() {
+    void Test_DeleteMarks_ThrowsWhenNotFound() {
         int id = 1;
 
         Mockito.when(markDAO.existsById(id)).thenReturn(false);
@@ -274,6 +273,4 @@ class MarkServiceImplTest {
 
         Assertions.assertTrue(thrown.getMessage().contains("1 is not found, can't be deleted"));
     }
-
-
 }

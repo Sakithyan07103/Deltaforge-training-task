@@ -28,7 +28,7 @@ class StudentServiceImplTest {
     private StudentServiceImpl studentService;
 
     @Test
-    void createStudentSuccessfully() {
+    void Test_CreateStudent_Successfully() {
         StudentsDTO dto = new StudentsDTO();
         dto.setStdName("John");
         dto.setStdRoll(101);
@@ -47,7 +47,7 @@ class StudentServiceImplTest {
     }
 
     @Test
-    void getAllStudentsSuccessfully() {
+    void Test_GetAllStudents_Successfully() {
         Students student1 = new Students();
         student1.setStdId(1);
         student1.setStdName("Alice");
@@ -68,7 +68,7 @@ class StudentServiceImplTest {
     }
 
     @Test
-    void getStudentByIdSuccessfully() {
+    void Test_GetStudentById_Successfully() {
         Students student = new Students();
         student.setStdId(1);
         student.setStdName("Charlie");
@@ -83,7 +83,7 @@ class StudentServiceImplTest {
     }
 
     @Test
-    void getStudentByIdThrowsWhenNotFound() {
+    void Test_GetStudentById_ThrowsWhenNotFound() {
         Mockito.when(studentDAO.findById(1)).thenReturn(Optional.empty());
 
         RuntimeException thrown = Assertions.assertThrows(
@@ -95,7 +95,7 @@ class StudentServiceImplTest {
     }
 
     @Test
-    void getStudentByNameSuccessfully() {
+    void Test_GetStudentByNameSuccessfully() {
         Students student = new Students();
         student.setStdId(1);
         student.setStdName("David");
@@ -109,7 +109,7 @@ class StudentServiceImplTest {
     }
 
     @Test
-    void getStudentByNameThrowsWhenNotFound() {
+    void Test_GetStudentByName_ThrowsWhenNotFound() {
         Mockito.when(studentDAO.findByStdName("Eve")).thenReturn(Optional.empty());
 
         EntityNotFoundException thrown = Assertions.assertThrows(
@@ -121,7 +121,7 @@ class StudentServiceImplTest {
     }
 
     @Test
-    void updateStudentSuccessfully() {
+    void Test_UpdateStudent_Successfully() {
         StudentsDTO dto = new StudentsDTO();
         dto.setStdId(1);
         dto.setStdName("Frank");
@@ -141,7 +141,7 @@ class StudentServiceImplTest {
     }
 
     @Test
-    void updateStudentThrowsWhenNotFound() {
+    void Test_UpdateStudent_ThrowsWhenNotFound() {
         StudentsDTO dto = new StudentsDTO();
         dto.setStdId(1);
         dto.setStdName("George");
@@ -158,7 +158,7 @@ class StudentServiceImplTest {
     }
 
     @Test
-    void deleteStudentSuccessfully() {
+    void Test_DeleteStudent_Successfully() {
         Mockito.when(studentDAO.existsById(1)).thenReturn(true);
 
         boolean result = studentService.deleteStudent(1);
@@ -168,7 +168,7 @@ class StudentServiceImplTest {
     }
 
     @Test
-    void deleteStudentThrowsWhenNotFound() {
+    void Test_DeleteStudent_ThrowsWhenNotFound() {
         Mockito.when(studentDAO.existsById(1)).thenReturn(false);
 
         EntityNotFoundException thrown = Assertions.assertThrows(
