@@ -33,7 +33,8 @@ class CustomerControllerTest {
         controller.customerService = customerService; // manual inject
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
-        customerDTO = new CustomerDTO(1, "testuser", "pass123", "test@mail.com");
+        customerDTO = new CustomerDTO
+                (1, "testuser", "pass123", "test@mail.com");
     }
 
     @Test

@@ -83,7 +83,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public CustomerDTO deleteCustomer(CustomerDTO customerDTO) {
-        Optional<Customer> optionalCustomer = Optional.ofNullable(customerDAO.findByCustomerUserName(customerDTO.getCustomerUserName()));
+        Optional<Customer> optionalCustomer =
+                Optional.ofNullable(customerDAO.findByCustomerUserName(customerDTO.getCustomerUserName()));
 
         if (optionalCustomer.isEmpty()) {
             throw new CustomerHaventRegisteredException("NO customer exist!");

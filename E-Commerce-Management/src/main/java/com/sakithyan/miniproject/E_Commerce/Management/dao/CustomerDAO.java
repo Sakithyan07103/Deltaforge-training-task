@@ -15,7 +15,8 @@ public class CustomerDAO {
     CustomerRepo customerRepo;
 
     public Customer customerRegister(Customer customer) {
-        if (customer.getCustomerUserName().length() > 2 && customer.getCustomerPassword().length() > 3 && customer.getCustomerEmail().contains("@")  ) {
+        if (customer.getCustomerUserName().length() > 2 && customer.getCustomerPassword().length() > 3
+                && customer.getCustomerEmail().contains("@")  ) {
             return customerRepo.save(customer);
         }
         throw new InvalidCredentialsException("check your credential and fill it acoordingly");
