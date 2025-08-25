@@ -44,10 +44,13 @@ public class CustomerDAO {
 
     public Customer deleteCustomer(Customer customer) {
         Customer existingCustomer = customerRepo.findByCustomerUserName(customer.getCustomerUserName());
+
         if (existingCustomer == null) {
             throw new RuntimeException("Customer not found with username: " + customer.getCustomerUserName());
         }
+
        customerRepo.deleteById(existingCustomer.getCustomerId());
+
        return existingCustomer;
     }
 }

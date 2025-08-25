@@ -36,7 +36,7 @@ class CustomerServiceImplTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         customerDTO = new CustomerDTO
-                (1, "testuser", "pass123", "test@mail.com");
+                        (1, "testuser", "pass123", "test@mail.com");
         customer = new Customer();
         customer.setCustomerId(1);
         customer.setCustomerUserName("testuser");

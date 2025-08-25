@@ -43,8 +43,4 @@ public class ProductDAO {
         productRepo.deleteById(existingProduct.getProductId());
         return existingProduct;
     }
-
-
-
-
 }
